@@ -1,0 +1,70 @@
+/* SECTION PROPAGANDA */
+
+.sectionAdvertising {
+    margin: auto;
+}
+
+.containerAdvertising {
+    max-width: 1280px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+@media (max-width: 1280px) {
+    .containerAdvertising {
+        max-width: 1024px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .containerAdvertising {
+        max-width: 768px;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .advertising {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .containerAdvertising {
+        max-width: 576px;
+    }
+}
+
+.advertising {
+    max-width: 500px;
+}
+
+.advertising h1 {
+    color: black;
+    font-size: 3rem;
+    font-weight: bold; /* Fonte em negrito */
+}
+
+.typical {
+    background-color: #ffead3; /* Cor de fundo */
+    border-color: orangered;
+    border-width: 3px;
+    color: #ffead3;  /* Cor da fonte */
+    font-size: 3rem; /* Tamanho da fonte */
+    font-weight: bold; /* Texto em negrito */
+}
+
+.imgAdvertising {
+    width: 100%;
+    max-width: 500px;
+}
+
+.imgAdvertising img {
+    width: 100%;
+}

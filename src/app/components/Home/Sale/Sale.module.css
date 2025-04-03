@@ -1,0 +1,89 @@
+/* SECTION OFERTA */
+.sectionSale {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.containerSale {
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+@media (max-width: 1280px) {
+    .containerSale {
+        max-width: 1024px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .containerSale {
+        max-width: 768px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .offSale {
+        margin-bottom: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .containerSale {
+        max-width: 576px;
+    }
+}
+
+.offSale img {
+    width: 100%;
+    max-width: 500px;
+}
+
+.infoSale {
+    max-width: 500px;
+    border: 1px rgb(158, 158, 158) solid;
+}
+
+.titleDesc h1 {
+    font-size: 2em;
+    margin: 10px;
+}
+
+.titleDesc h2 {
+    font-size: 1em;
+    margin: 10px;
+}
+
+.listI {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.listI h3 {
+    font-size: 1em;
+    color: black;
+}
+
+.iconList {
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 10px;
+    font-size: 2em;
+    border-radius: 100%;
+    background-color: rgb(255, 72, 0);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

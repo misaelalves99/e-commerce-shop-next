@@ -1,0 +1,60 @@
+/* Modal.module.css */
+.modal {
+  position: absolute;
+  top: 100%; /* Posiciona abaixo do ícone de usuário */
+  right: 0;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 150px;
+  padding: 8px 0;
+  text-align: left; /* Alinhamento de texto no container do modal */
+}
+
+.modalContent {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modalItem {
+  padding: 8px 15px;
+  font-size: 1rem; /* Tamanho padrão do texto */
+  text-align: left; /* Garante o alinhamento à esquerda para os itens */
+}
+
+.modalItem a {
+  display: block; /* Faz o link ocupar toda a largura do li para o padding funcionar */
+  color: inherit; /* Herda a cor do texto do li */
+  text-decoration: none; /* Remove sublinhado do link */
+  font-size: 1rem; /* Garante que o tamanho da fonte do link será o mesmo que o texto */
+}
+
+.modalItem:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.logoutBtn {
+  width: 100%; /* Garante que o botão ocupe toda a largura disponível */
+  border: none;
+  background: none;
+  text-align: left; /* Alinha o texto à esquerda */
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 1rem; /* Tamanho padrão do texto */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Alinha o conteúdo do botão à esquerda */
+}
+
+.logoutIcon {
+  margin-right: 8px; /* Espaço entre o ícone e o texto */
+  font-size: 1.2rem; /* Ajusta o tamanho do ícone */
+}
+
+.logoutBtn:hover {
+  background-color: #eee;
+}

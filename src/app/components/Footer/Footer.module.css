@@ -1,0 +1,272 @@
+/* Footer.module.css */
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    background-color: #1A1A1A;
+  }
+  
+  .containerFooter {
+    max-width: 1280px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 80px;
+    justify-content: space-between;
+    margin: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  @media (max-width: 1280px) {
+    .containerFooter {
+      max-width: 1024px;
+      gap: 10px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .containerFooter {
+      max-width: 768px;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  
+    .ourApp {
+      margin-right: auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .containerFooter {
+      max-width: 576px;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 10px;
+    }
+  
+    .contactCompany {
+      margin-bottom: 40px;
+    }
+  
+    .aboutUsService {
+      margin-right: auto;
+      margin-bottom: 40px;
+    }
+  }
+  
+  .contactCompany {
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+  }
+  
+  .nameCompany {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  
+  .nameCompany .iconCC {
+    font-size: 2rem;
+    color: white;
+  }
+  
+  .nameCompany h2 {
+    color: white;
+    font-size: 1.3rem;
+    margin-left: 20px;
+  }
+  
+  .descCompany {
+    font-size: .9rem;
+    color: white;
+    text-align: left;
+  }
+  
+  .socialMediaFooter {
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .iconSm {
+    font-size: 2rem;
+    color: white;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  
+  .iconSm:hover {
+    color: rgb(255, 72, 0);
+  }
+  
+  .locationF {
+    display: flex;
+    padding-bottom: 20px;
+    text-align: left;
+  }
+  
+  .contactF {
+    display: flex;
+    padding-bottom: 20px;
+    text-align: left;
+  }
+  
+  .iconCl {
+    color: white;
+  }
+  
+  .locationF h3, .contactF h3 {
+    font-size: 1rem;
+    color: white;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  
+  .aboutUsService {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .aboutUs {
+    margin-bottom: 20px;
+  }
+  
+  .aboutUs h1 {
+    color: white;
+    font-size: 1.3rem;
+    text-align: left;
+  }
+  
+  .aboutUs ul {
+    margin-top: 15px;
+  }
+  
+  .aboutUs ul li {
+    font-size: .9rem;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  
+  .aboutUs ul li:hover {
+    color: rgb(255, 72, 0);
+  }
+  
+  .service {
+    margin-top: 20px;
+  }
+  
+  .service h1 {
+    color: white;
+    font-size: 1.3rem;
+    text-align: left;
+  }
+  
+  .service ul {
+    margin-top: 15px;
+  }
+  
+  .service ul li {
+    font-size: .9rem;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  
+  .service ul li:hover {
+    color: rgb(255, 72, 0);
+  }
+  
+  .ourApp {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .ourApp h1 {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .apps {
+    margin-top: 10px;
+  }
+  
+  .app {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 28px;
+    background-color: rgb(69, 69, 69);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .app:hover {
+    background-color: rgb(255, 72, 0);
+  }
+  
+  .iconApp {
+    font-size: 1.9rem;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .app h3 {
+    font-size: 1.3rem;
+    color: white;
+  }
+  
+  .copyright {
+    background-color: rgb(35, 35, 35);
+    margin-top: 50px;
+  }
+  
+  .containerCopyright {
+    max-width: 1500px;
+    font-size: 1rem;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    text-align: center;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  
+  .containerCopyright p {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: .9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .containerCopyright p {
+      font-size: .8rem;
+    }
+  }
+  
+  .containerCopyright a {
+    color: white;
+    text-decoration: underline;
+  }
+  
+  .containerCopyright :hover a {
+    color: rgb(255, 72, 0);
+  }
+  
