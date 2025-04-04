@@ -1,7 +1,7 @@
 // "app/components/Home/Emphasis/page.tsx"
 "use client";
 import styles from './Emphasis.module.css'; // Importando o CSS Module
-import { CardProducts, Product } from '../../../api/page'; // Importação de tipos e dados
+import { CardProducts, Product } from '../../../api/products'; // Importação de tipos e dados
 import { useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ProductCard from "../../../components/ProductCard/page";

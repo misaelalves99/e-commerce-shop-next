@@ -5,7 +5,7 @@ import AppContext from "../../context/AppContext";
 import styles from "./ProductCard.module.css";
 import { FaShoppingCart, FaStar, FaHeart } from "react-icons/fa";
 
-import { Product as ProductType } from "../../api/page"; 
+import { Product as ProductType } from "../../api/products"; 
 
 interface ProductCardProps {
   product: ProductType;

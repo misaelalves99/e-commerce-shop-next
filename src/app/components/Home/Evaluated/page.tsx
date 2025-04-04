@@ -1,6 +1,6 @@
 // "app/components/Home/Evaluated/page.tsx"
 "use client";
-import { CardProducts, Product } from '../../../api/page'; // Importação de tipos e dados
+import { CardProducts, Product } from '../../../api/products'; // Importação de tipos e dados
 import { useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ProductCard from "../../../components/ProductCard/page";

@@ -1,7 +1,7 @@
 // "app/products/page.tsx"
 "use client";
 import React, { useState, useEffect } from "react";
-import { CardCategories, CardProducts, Product as ProductType } from "../api/page";
+import { CardCategories, CardProducts, Product as ProductType } from "../api/products";
 import ProductCard from "../components/ProductCard/page";
 import MainContainer from "../components/MainContainer/page";
 import styles from "./Products.module.css"; // Importando o CSS Module

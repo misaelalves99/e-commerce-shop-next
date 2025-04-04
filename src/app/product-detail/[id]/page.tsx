@@ -2,7 +2,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation"; // Importação correta do hook
-import { CardProducts } from "../../api/page"; // Caminho pode variar
+import { CardProducts } from "../../api/products"; // Caminho pode variar
 import Image from "next/image"; // Importando o componente Image do Next.js
 import { StaticImageData } from "next/image";
 import styles from "../ProductDetail.module.css"; // Importando o CSS Module

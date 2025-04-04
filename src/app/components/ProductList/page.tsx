@@ -6,7 +6,7 @@ import styles from "./ProductList.module.css";
 // import { StaticImageData } from "next/image";
 import { FaShoppingCart, FaStar } from "react-icons/fa";
 
-import { Product as ProductType } from "../../api/page"; // Importa o tipo correto
+import { Product as ProductType } from "../../api/products"; // Importa o tipo correto
 
 interface ProductCardProps {
   product: ProductType; // Usa o tipo correto da API

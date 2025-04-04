@@ -1,7 +1,7 @@
 // "app/context/AppContext.jsx"
 "use client";
 import React, { createContext, useState, ReactNode } from "react";
-import { Product as ProductType } from "../api/page"; // Renomeando para evitar conflito
+import { Product as ProductType } from "../api/products"; // Renomeando para evitar conflito
 import type { StaticImageData } from "next/image";
 
 // Definindo os tipos das informações armazenadas no contexto
