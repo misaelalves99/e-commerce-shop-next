@@ -2,7 +2,7 @@
 "use client";
 import { useContext } from "react";
 import AppContext from "../../context/AppContext"; // Importando o contexto
-import styles from "./ProductCard.module.css";
+import styles from "./ProductList.module.css";
 // import { StaticImageData } from "next/image";
 import { FaShoppingCart, FaStar } from "react-icons/fa";
 
