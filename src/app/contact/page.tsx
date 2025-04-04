@@ -1,7 +1,7 @@
 // app/contact/page.tsx
 
-import MainContainer from '../components/MainContainer/page';
-import Form from '../components/Form/page';
+import MainContainer from '../components/MainContainer/MainContainer';
+import Form from '../components/Form/Form';
 
 const Contact: React.FC = () => {
   return (

@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import AppContext from "../context/AppContext";
 import styles from "./Favorites.module.css";
-import ProductCard from "../components/ProductCard/page";
+import ProductCard from "../components/ProductCard/ProductCard";
 
 const FavoritesPage = () => {
   const context = useContext(AppContext);

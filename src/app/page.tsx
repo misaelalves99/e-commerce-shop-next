@@ -1,10 +1,10 @@
 // "app/page.tsx"
 "use client";
-import MainContainer from "./components/MainContainer/page";
-import Advertising from "./components/Home/Advertising/page";
-import Emphasis from "./components/Home/Emphasis/page";
-import Evaluated from './components/Home/Evaluated/page';
-import Sale from './components/Home/Sale/page';
+import MainContainer from "./components/MainContainer/MainContainer";
+import Advertising from "./components/Home/Advertising/Advertising";
+import Emphasis from "./components/Home/Emphasis/Emphasis";
+import Evaluated from './components/Home/Evaluated/Evaluated';
+import Sale from './components/Home/Sale/Sale';
 
 export default function Home() {
     return (

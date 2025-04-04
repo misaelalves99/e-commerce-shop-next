@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import AppContext from '../../context/AppContext';
 import styles from './Header.module.css';
-import Modal from '../Modal/page'; // Importe o componente Modal
+import Modal from '../Modal/Modal'; // Importe o componente Modal
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

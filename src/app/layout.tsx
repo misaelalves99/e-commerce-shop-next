@@ -1,8 +1,8 @@
 // app/layout.tsx
 import React, { ReactNode } from "react";
 import { AppProvider } from "./context/AppContext";
-import Header from "./components/Header/page";
-import Footer from "./components/Footer/page";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import "../app/globals.css"; // Estilos globais
 import { Metadata } from "next"; // (Opcional) Importação para definir metadados HTML
 
