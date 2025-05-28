@@ -88,7 +88,7 @@ const Footer = () => {
       <div className={styles.copyright}>
         <div className={styles.containerCopyright}>
           <p>&copy; 2024 E-Commerce Shop. Todos os direitos reservados.</p>
-          <p>Desenvolvido por <Link href="https://misael-alves-portfolio.vercel.app/" target='_blank' passHref> Misael Alves </Link></p>
+          <p>Desenvolvido por <Link href="https://misael-alves-portfolio-next.vercel.app/" target='_blank' passHref> Misael Alves </Link></p>
         </div>
       </div>
 
