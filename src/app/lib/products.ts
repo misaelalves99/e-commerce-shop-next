@@ -1,37 +1,17 @@
 // "app/api/page.ts"
-import React from "react";
-import { StaticImageData } from "next/image";
 
-import { FaBorderAll } from "react-icons/fa6";
-import { GiClothes } from "react-icons/gi";
-import { GiRunningShoe } from "react-icons/gi";
+import { FaBorderAll, FaComputer } from "react-icons/fa6";
+import { GiClothes, GiRunningShoe, GiBilledCap } from "react-icons/gi";
 import { RiCellphoneFill } from "react-icons/ri";
 import { IoHeadset } from "react-icons/io5";
-import { GiBilledCap } from "react-icons/gi";
 import { BsFillSpeakerFill } from "react-icons/bs";
 import { MdToys } from "react-icons/md";
-import { FaComputer } from "react-icons/fa6";
 import { FaTabletAlt } from "react-icons/fa";
 
-export interface CardCategories {
-    id: number;
-    title: string;
-    icon: React.ElementType; // Tipo correto para componentes React
-  }
+import type { CardCategory } from "../types/category";
+import type { Product } from "../types/product";
 
-export interface Product {
-    id: number;
-    title: string;
-    rating: number;
-    priceOld: number;
-    discount: string;
-    mainImage: StaticImageData | string; // Agora aceita ambos os tipos
-    images: (StaticImageData | string)[]; // Agora aceita array de ambos os tipos
-    price: number;
-    category: string;
-}
-
-export const CardCategories: CardCategories[] = [
+export const CardCategories: CardCategory[] = [
     {
         id: 1,
         title: "Todos",
@@ -958,3 +938,5 @@ export const CardProducts: Product[] = [
         category: "Tablets"
     }      
 ];
+
+export type { Product };

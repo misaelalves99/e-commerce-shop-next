@@ -1,10 +1,11 @@
+// app/components/Form/Form.tsx
+
 import React from 'react';
-import styles from './Form.module.css'; // Importando o arquivo CSS Module
+import styles from './Form.module.css';
 
 const Form = () => {
   return (
     <section className={styles.sectionForm}>
-      {/* <Fade bottom duration={2000} distance="40px"> */}
       <div className={styles.containerForm}>
         <div className={styles.containerTitle}>
           <h1 className={styles.formTitle}>CONTATE-NOS</h1>
@@ -26,7 +27,6 @@ const Form = () => {
           </form>
         </div>
       </div>
-      {/* </Fade> */}
     </section>
   );
 };

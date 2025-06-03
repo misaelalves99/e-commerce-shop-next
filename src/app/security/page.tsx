@@ -1,16 +1,13 @@
 // "app/security/page.tsx"
+
 "use client";
+
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import styles from "./Security.module.css";
-
-// Definindo um tipo para os dados do usuário
-interface User {
-  email: string;
-  password: string;
-}
+import { User, PasswordFormData } from "../types/user";
 
 const Security: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PasswordFormData>({
     currentPassword: "",
     newPassword: "",
     confirmNewPassword: "",
@@ -26,7 +23,6 @@ const Security: React.FC = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    // Verificar se as senhas coincidem
     if (formData.newPassword !== formData.confirmNewPassword) {
       setErrorMessage("As senhas não coincidem.");
       return;
@@ -47,14 +43,13 @@ const Security: React.FC = () => {
       return;
     }
 
-    // Verificando a senha atual
     if (formData.currentPassword !== user.password) {
       setErrorMessage("Senha atual incorreta.");
       return;
     }
 
-    // Atualizando a senha
     user.password = formData.newPassword;
+
     const updatedUsers = users.map((u) =>
       u.email === user.email ? user : u
     );

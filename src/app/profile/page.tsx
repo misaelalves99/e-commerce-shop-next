@@ -1,16 +1,10 @@
 // "app/profile/page.tsx"
+
 "use client";
+
 import React, { useState, useEffect, ChangeEvent } from "react";
 import styles from "./Profile.module.css";
-
-interface UserData {
-  fullName: string;
-  cpf: string;
-  birthDate: string;
-  gender: string;
-  phone: string;
-  email: string;
-}
+import { UserData } from "../types/user";
 
 const Profile: React.FC = () => {
   const [userData, setUserData] = useState<UserData>({
@@ -56,24 +50,48 @@ const Profile: React.FC = () => {
   return (
     <div className={styles.profileContainer}>
       <h2 className={styles.profileTitle}>Meu Perfil</h2>
+
       <div className={styles.formGroup}>
         <label>Nome Completo:</label>
-        <input type="text" name="fullName" value={userData.fullName} onChange={handleChange} disabled={!isEditing} />
+        <input
+          type="text"
+          name="fullName"
+          value={userData.fullName}
+          onChange={handleChange}
+          disabled={!isEditing}
+        />
       </div>
 
       <div className={styles.formGroup}>
         <label>CPF:</label>
-        <input type="text" name="cpf" value={userData.cpf} onChange={handleChange} disabled />
+        <input
+          type="text"
+          name="cpf"
+          value={userData.cpf}
+          onChange={handleChange}
+          disabled
+        />
       </div>
 
       <div className={styles.formGroup}>
         <label>Data de Nascimento:</label>
-        <input type="date" name="birthDate" value={userData.birthDate} onChange={handleChange} disabled={!isEditing} />
+        <input
+          type="date"
+          name="birthDate"
+          value={userData.birthDate}
+          onChange={handleChange}
+          disabled={!isEditing}
+        />
       </div>
 
       <div className={styles.formGroup}>
         <label>Gênero:</label>
-        <select name="gender" value={userData.gender} onChange={handleChange} disabled={!isEditing}>
+        <select
+          name="gender"
+          value={userData.gender}
+          onChange={handleChange}
+          disabled={!isEditing}
+        >
           <option value="masculino">Masculino</option>
           <option value="feminino">Feminino</option>
           <option value="outro">Outro</option>
@@ -82,12 +100,24 @@ const Profile: React.FC = () => {
 
       <div className={styles.formGroup}>
         <label>Telefone:</label>
-        <input type="tel" name="phone" value={userData.phone} onChange={handleChange} disabled={!isEditing} />
+        <input
+          type="tel"
+          name="phone"
+          value={userData.phone}
+          onChange={handleChange}
+          disabled={!isEditing}
+        />
       </div>
 
       <div className={styles.formGroup}>
         <label>Email:</label>
-        <input type="email" name="email" value={userData.email} onChange={handleChange} disabled />
+        <input
+          type="email"
+          name="email"
+          value={userData.email}
+          onChange={handleChange}
+          disabled
+        />
       </div>
 
       <button className={styles.editButton} onClick={isEditing ? handleSave : handleEdit}>

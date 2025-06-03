@@ -1,10 +1,11 @@
 // app/layout.tsx
+
 import React, { ReactNode } from "react";
 import { AppProvider } from "./context/AppContext";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import "../app/globals.css"; // Estilos globais
-import { Metadata } from "next"; // (Opcional) Importação para definir metadados HTML
+import "../app/globals.css";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Meu Site",
@@ -21,7 +22,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <body>
         <AppProvider>
           <Header />
-          <main>{children}</main>
+          <main>
+            {children}
+          </main>
           <Footer />
         </AppProvider>
       </body>

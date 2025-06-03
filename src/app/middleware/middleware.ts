@@ -1,4 +1,5 @@
-// "app/middleware/page.jsx":
+// "app/middleware/page.tsx"
+
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -13,5 +14,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard", "/profile"], // Protegendo páginas específicas
+  matcher: ["/dashboard", "/profile"],
 };

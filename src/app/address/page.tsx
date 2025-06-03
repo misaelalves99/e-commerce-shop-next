@@ -1,27 +1,22 @@
-"use client";
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import styles from "./Address.module.css";
+// app/adderess/page.tsx
 
-interface AddressData {
-  street: string;
-  neighborhood: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  complement: string;
-}
+'use client';
+
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import styles from './Address.module.css';
+import type { AddressData } from '../types/address';
 
 const Address: React.FC = () => {
   const [address, setAddress] = useState<AddressData>({
-    street: "",
-    neighborhood: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    complement: "",
+    street: '',
+    neighborhood: '',
+    city: '',
+    state: '',
+    postalCode: '',
+    complement: '',
   });
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,7 +26,6 @@ const Address: React.FC = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    // Verifica se algum campo obrigatório está vazio
     if (
       !address.street ||
       !address.neighborhood ||
@@ -39,13 +33,12 @@ const Address: React.FC = () => {
       !address.state ||
       !address.postalCode
     ) {
-      setErrorMessage("Por favor, preencha todos os campos obrigatórios.");
+      setErrorMessage('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
 
-    // Armazenando os dados de endereço no localStorage
-    localStorage.setItem("address", JSON.stringify(address));
-    alert("Endereço salvo com sucesso!");
+    localStorage.setItem('address', JSON.stringify(address));
+    alert('Endereço salvo com sucesso!');
   };
 
   return (

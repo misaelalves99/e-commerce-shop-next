@@ -1,5 +1,7 @@
 // "app/favorites/page.jsx":
+
 "use client";
+
 import { useContext } from "react";
 import AppContext from "../context/AppContext";
 import styles from "./Favorites.module.css";

@@ -1,8 +1,9 @@
 // app/components/Footer/Footer.tsx
+
 import { FaShoppingBag, FaLinkedin, FaGithub, FaInstagram, FaFacebook, FaPhoneVolume, FaAppStoreIos, FaGooglePlay } from 'react-icons/fa';
 import { TbLocationFilled } from 'react-icons/tb';
 import Link from 'next/link';
-import styles from './Footer.module.css'; // Importando o CSS Module
+import styles from './Footer.module.css';
 
 const Footer = () => {
   return (

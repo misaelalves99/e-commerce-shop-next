@@ -1,16 +1,16 @@
 // "app/components/Home/Evaluated/page.tsx"
 "use client";
-import { CardProducts, Product } from '../../../api/products'; // Importação de tipos e dados
+import { CardProducts, Product } from '../../../lib/products';
 import { useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ProductCard from "../../ProductCard/ProductCard";
-import styles from './Evaluated.module.css'; // Importando o CSS Module
+import styles from './Evaluated.module.css';
 
 const Evaluated: React.FC = () => {
   const carouselRef = useRef<HTMLDivElement | null>(null);
-  const visibleCards = 4; // Quantidade de cards visíveis ao mesmo tempo
-  const cardWidth = 300; // Largura de um card (ajuste para corresponder ao seu design)
-  const scrollByAmount = visibleCards * cardWidth; // Calcula o deslocamento total com base nos cards visíveis
+  const visibleCards = 4;
+  const cardWidth = 300;
+  const scrollByAmount = visibleCards * cardWidth;
 
   const scrollLeft = () => {
     if (carouselRef.current) {

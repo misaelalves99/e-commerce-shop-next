@@ -1,8 +1,9 @@
 // "app/components/Modal/page.tsx"
+
 import React from 'react';
 import Link from 'next/link';
-import { MdExitToApp } from 'react-icons/md'; // Importando o ícone de logout do React Icons
-import styles from './Modal.module.css'; // Importando o CSS Module
+import { MdExitToApp } from 'react-icons/md';
+import styles from './Modal.module.css';
 
 interface ModalProps {
   isAuthenticated: boolean;

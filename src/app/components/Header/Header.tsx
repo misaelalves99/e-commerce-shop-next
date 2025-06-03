@@ -1,4 +1,7 @@
+// app/components/Header/Header.tsx
+
 "use client";
+
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { FaSearch, FaCartPlus, FaUser } from 'react-icons/fa';
 import { MdFavorite } from 'react-icons/md';
@@ -6,12 +9,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import AppContext from '../../context/AppContext';
 import styles from './Header.module.css';
-import Modal from '../Modal/Modal'; // Importe o componente Modal
+import Modal from '../Modal/Modal';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false); // Controla a exibição do modal
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true); // Indica se o usuário está autenticado
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
   const profileRef = useRef<HTMLDivElement>(null);
 
   const context = useContext(AppContext);
@@ -34,22 +37,19 @@ const Header: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  // Função para mostrar o modal quando o mouse entra
   const handleMouseEnterProfile = () => {
     setShowModal(true);
   };
 
-  // Função para esconder o modal quando o mouse sai
   const handleMouseLeaveProfile = () => {
     setShowModal(false);
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    router.push('/login'); // Redireciona para a página de login
+    router.push('/login');
   };
 
-  // Fechar o modal ao clicar fora dele
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
@@ -92,11 +92,11 @@ const Header: React.FC = () => {
             </div>
             <div
               className={styles.profileUser}
-              onMouseEnter={handleMouseEnterProfile} // Exibe o modal ao passar o mouse
-              onMouseLeave={handleMouseLeaveProfile} // Esconde o modal ao sair o mouse
+              onMouseEnter={handleMouseEnterProfile}
+              onMouseLeave={handleMouseLeaveProfile}
               ref={profileRef}
             >
-              <FaUser className={styles.profileIcon} /> {/* Tamanho do ícone controlado aqui */}
+              <FaUser className={styles.profileIcon} />
               {showModal && <Modal isAuthenticated={isAuthenticated} onLogout={handleLogout} />}
             </div>
           </div>

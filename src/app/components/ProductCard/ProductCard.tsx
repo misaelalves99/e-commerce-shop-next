@@ -1,11 +1,13 @@
-// "app/components/ProductCard/page.tsx"
+// app/components/ProductCard/ProductCard.tsx
+
 "use client";
+
 import { useContext } from "react";
+import Image from "next/image";
+import { FaShoppingCart, FaStar, FaHeart } from "react-icons/fa";
 import AppContext from "../../context/AppContext";
 import styles from "./ProductCard.module.css";
-import { FaShoppingCart, FaStar, FaHeart } from "react-icons/fa";
-
-import { Product as ProductType } from "../../api/products"; 
+import type { Product as ProductType } from "../../types/product";
 
 interface ProductCardProps {
   product: ProductType;
@@ -13,13 +15,9 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const context = useContext(AppContext);
-
-  if (!context) {
-    return null;
-  }
+  if (!context) return null;
 
   const { addToCart, addToFavorites, removeFromFavorites, favorites } = context;
-
   const isFavorite = favorites.some((fav) => fav.id === product.id);
 
   const toggleFavorite = () => {
@@ -30,20 +28,30 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
-  const discountValue = product.discount ? Number(product.discount.toString().replace(/\D/g, "")) : null;
+  const discountValue = product.discount
+    ? Number(product.discount.toString().replace(/\D/g, ""))
+    : null;
 
   return (
-    <div className={styles.card} style={{ cursor: "pointer" }}>
-      {/* Ícone de Favoritos no topo direito */}
+    <div className={styles.card}>
       <button className={styles.favoriteButton} onClick={toggleFavorite}>
-        <FaHeart color={isFavorite ? "red" : "#989898;;"} />
+        <FaHeart color={isFavorite ? "red" : "#989898"} />
       </button>
 
-      <img
-        src={typeof product.mainImage === "string" ? product.mainImage : product.mainImage.src}
-        alt={product.title}
-        className={styles.image}
-      />
+      <div className={styles.imageWrapper}>
+        <Image
+          src={
+            typeof product.mainImage === "string"
+              ? product.mainImage
+              : product.mainImage.src
+          }
+          alt={product.title}
+          width={300}
+          height={300}
+          className={styles.image}
+        />
+      </div>
+
       <div className={styles.details}>
         <h3 className={styles.title}>{product.title}</h3>
 
@@ -54,8 +62,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         <div className={styles.priceDetails}>
-          {product.priceOld && <span className={styles.priceOld}>R${product.priceOld.toFixed(2)}</span>}
-          {discountValue !== null && <span className={styles.discount}>-{discountValue}%</span>}
+          {product.priceOld && (
+            <span className={styles.priceOld}>
+              R${product.priceOld.toFixed(2)}
+            </span>
+          )}
+          {typeof discountValue === "number" && (
+            <span className={styles.discount}>-{discountValue}%</span>
+          )}
         </div>
 
         <div className={styles.priceContainer}>

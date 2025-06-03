@@ -1,9 +1,10 @@
 // "app/products/page.tsx"
+
 "use client";
+
 import React, { useState, useEffect } from "react";
-import { CardCategories, CardProducts, Product as ProductType } from "../api/products";
+import { CardCategories, CardProducts, Product as ProductType } from "../lib/products";
 import ProductCard from "../components/ProductCard/ProductCard";
-import MainContainer from "../components/MainContainer/MainContainer";
 import styles from "./Products.module.css"; // Importando o CSS Module
 
 const Products: React.FC = () => {
@@ -13,7 +14,7 @@ const Products: React.FC = () => {
   useEffect(() => {
     const convertedProducts = CardProducts.map((product) => ({
       ...product,
-      discount: product.discount.toString(), // Garantindo que permaneça como string
+      discount: product.discount?.toString(), // Evita erro se for undefined
     }));
 
     if (selectedCategory === "Todos") {
@@ -26,8 +27,7 @@ const Products: React.FC = () => {
   }, [selectedCategory]);
 
   return (
-    <MainContainer>
-      {/* Filtro de Categorias */}
+    <div className={styles.productsPageContainer}>
       <div className={styles.filterCategory}>
         <div className={styles.listCategory}>
           <div className={styles.titleCategory}>
@@ -54,13 +54,12 @@ const Products: React.FC = () => {
         </div>
       </div>
 
-      {/* Lista de Produtos Filtrados */}
       <div className={styles.productList}>
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-    </MainContainer>
+    </div>
   );
 };
 

@@ -1,29 +1,12 @@
-// "app/context/AppContext.jsx"
+// "app/context/AppContext.tsx"
+
 "use client";
+
 import React, { createContext, useState, ReactNode } from "react";
-import { Product as ProductType } from "../api/products"; // Renomeando para evitar conflito
+import { Product as ProductType } from "../lib/products";
 import type { StaticImageData } from "next/image";
-
-// Definindo os tipos das informações armazenadas no contexto
-interface CartItem {
-  id: number;
-  title: string;
-  price: number;
-  images: string; // Garantindo que seja apenas uma string
-  quantity: number; // Adicionando a quantidade
-}
-
-interface AppContextType {
-  cart: CartItem[];
-  favorites: ProductType[];
-  addToCart: (product: ProductType) => void;
-  increaseQuantity: (id: number) => void;
-  decreaseQuantity: (id: number) => void;
-  removeFromCart: (id: number) => void;
-  addToFavorites: (product: ProductType) => void;
-  removeFromFavorites: (id: number) => void;
-  setFavorites: (favorites: ProductType[]) => void;
-}
+import { CartItem } from "../types/cart";
+import { AppContextType } from "../types/context";
 
 const AppContext = createContext<AppContextType | null>(null);
 
@@ -51,7 +34,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             title: product.title,
             price: product.price,
             images: Array.isArray(product.images) ? getImage(product.images[0]) : getImage(product.images),
-            quantity: 1, // Definindo a quantidade inicial como 1
+            quantity: 1,
           },
         ];
       }
@@ -72,7 +55,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         .map((item) =>
           item.id === id ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
         )
-        .filter((item) => item.quantity > 0) // Remover item se a quantidade for 0
+        .filter((item) => item.quantity > 0)
     );
   };
 

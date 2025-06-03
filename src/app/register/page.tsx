@@ -1,27 +1,19 @@
 // "app/register/page.tsx"
+
 "use client";
+
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./Register.module.css";
-import bcrypt from "bcryptjs"; // Para criptografar senhas
-import { FaGoogle, FaFacebookF } from "react-icons/fa"; // Ícones de Google e Facebook
-
-interface FormData {
-  email: string;
-  password: string;
-  confirmPassword: string; // Campo de confirmação de senha
-}
-
-interface User {
-  email: string;
-  password: string;
-}
+import bcrypt from "bcryptjs";
+import { FaGoogle, FaFacebookF } from "react-icons/fa";
+import { FormData, User } from "../types/auth";
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
-    confirmPassword: "", // Campo de confirmação de senha
+    confirmPassword: "",
   });
 
   const router = useRouter();
@@ -34,27 +26,22 @@ const Register: React.FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Verificando se as senhas coincidem
     if (formData.password !== formData.confirmPassword) {
       alert("As senhas não coincidem.");
       return;
     }
 
-    // Recuperando usuários cadastrados
     const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");
 
-    // Verificando se o e-mail já está cadastrado
     const userExists = users.some((user) => user.email === formData.email);
     if (userExists) {
       alert("Este e-mail já está cadastrado.");
       return;
     }
 
-    // Criptografando a senha antes de salvar
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(formData.password, salt);
 
-    // Criando novo usuário
     const newUser: User = { email: formData.email, password: hashedPassword };
     localStorage.setItem("users", JSON.stringify([...users, newUser]));
 
@@ -66,6 +53,7 @@ const Register: React.FC = () => {
     <div className={styles.registerFormContainer}>
       <form className={styles.registerForm} onSubmit={handleSubmit}>
         <h2>Criar Cadastro</h2>
+
         <label>Email</label>
         <input
           type="email"
@@ -74,6 +62,7 @@ const Register: React.FC = () => {
           onChange={handleChange}
           required
         />
+
         <label>Senha</label>
         <input
           type="password"
@@ -82,6 +71,7 @@ const Register: React.FC = () => {
           onChange={handleChange}
           required
         />
+
         <label>Confirmar Senha</label>
         <input
           type="password"
@@ -90,14 +80,15 @@ const Register: React.FC = () => {
           onChange={handleChange}
           required
         />
+
         <button type="submit" className={styles.createAccountBtn}>
           Criar Cadastro
         </button>
+
         <p className={styles.signinLink}>
           Já tem cadastro? <a href="/login">Entrar</a>
         </p>
 
-        {/* Botões de login social */}
         <div className={styles.socialLogin}>
           <button type="button" className={styles.googleBtn}>
             <FaGoogle className={styles.icon} /> Entrar com Google

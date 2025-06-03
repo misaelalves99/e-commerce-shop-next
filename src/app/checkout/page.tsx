@@ -1,3 +1,5 @@
+// app/checkout/page.tsx
+
 "use client";
 import { useContext, useState } from "react";
 import AppContext from "../context/AppContext";
@@ -9,10 +11,10 @@ const CheckoutPage = () => {
   const context = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: "",
-    cpf: "",  // Adicionando CPF no estado do formulário
+    cpf: "",
     addressLine1: "",
     addressLine2: "",
-    complement: "",  // Novo campo complemento
+    complement: "",
     number: "",
     neighborhood: "",
     city: "",

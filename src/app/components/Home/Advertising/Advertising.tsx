@@ -1,7 +1,8 @@
 // "app/components/Home/Adversing/page.tsx"
-import styles from './Advertising.module.css'; // Importando o CSS Module
+
+import styles from './Advertising.module.css';
 import Typical from 'react-typical';
-import Image from 'next/image'; // Usar 'next/image' para otimização de imagens no Next.js
+import Image from 'next/image';
 
 const Advertising: React.FC = () => {
   return (
@@ -25,13 +26,12 @@ const Advertising: React.FC = () => {
           </h1>
         </div>
         <div className={styles.imgAdvertising}>
-          {/* Usando o componente Image do Next.js e apontando diretamente para a pasta public */}
           <Image 
-            src="/assets/img-propaganda.png" // ✅ Caminho direto (sem import)
+            src="/assets/img-propaganda.png"
             alt="Publicidade - Desconto" 
-            width={500} // Especifique a largura (ajuste conforme necessário)
-            height={300} // Especifique a altura (ajuste conforme necessário)
-            objectFit="cover" // Ajuste de como a imagem será cortada se necessário
+            width={500}
+            height={300}
+            objectFit="cover"
           />
         </div>
       </div>

@@ -1,14 +1,16 @@
 // "app/components/Home/Emphasis/page.tsx"
+
 "use client";
-import styles from './Emphasis.module.css'; // Importando o CSS Module
-import { CardProducts, Product } from '../../../api/products'; // Importação de tipos e dados
+
+import styles from './Emphasis.module.css';
+import { CardProducts, Product } from '../../../lib/products';
 import { useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ProductCard from "../../ProductCard/ProductCard";
 
 const Emphasis: React.FC = () => {
   const carouselRef = useRef<HTMLDivElement | null>(null);
-  const scrollByAmount = 300; // Quantidade de deslocamento por clique
+  const scrollByAmount = 300;
 
   const scrollLeft = () => {
     if (carouselRef.current) {
