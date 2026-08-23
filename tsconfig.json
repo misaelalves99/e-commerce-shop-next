@@ -1,4 +1,3 @@
-// tsconfig.json
 {
   "compilerOptions": {
     /* Target / módulo moderno para Next 15/16 + React 19 */
