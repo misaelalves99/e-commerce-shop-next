@@ -73,6 +73,8 @@ export function CartProvider({ children }: CartProviderProps) {
   const [items, setItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
+    // localStorage is an external client-side source hydrated after SSR.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setItems(loadCartFromStorage());
   }, []);
 

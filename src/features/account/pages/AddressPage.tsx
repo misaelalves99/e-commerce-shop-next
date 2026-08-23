@@ -1,7 +1,6 @@
 // src/features/account/pages/AddressPage.tsx
 'use client';
 
-import { useState } from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
 import { useAuth } from '@/core/hooks/useAuth';
@@ -13,27 +12,8 @@ import styles from '../styles/AddressPage.module.css';
 export default function AddressPage() {
   const { address, updateAddress } = useAuth();
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [serverError, setServerError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
   const handleSubmit = async (values: AddressData) => {
-    setServerError(null);
-    setSuccessMessage(null);
-    setIsSubmitting(true);
-
-    try {
-      await updateAddress(values);
-      setSuccessMessage('Endereço atualizado com sucesso.');
-    } catch (error: unknown) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : 'Não foi possível salvar o endereço. Tente novamente.';
-      setServerError(message);
-    } finally {
-      setIsSubmitting(false);
-    }
+    await updateAddress(values);
   };
 
   return (

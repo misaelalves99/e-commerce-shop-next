@@ -52,6 +52,8 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
 
   useEffect(() => {
     const stored = loadFavoritesFromStorage();
+    // localStorage is an external client-side source hydrated after SSR.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFavoriteIds(stored);
   }, []);
 
