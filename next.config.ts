@@ -1,7 +1,24 @@
-import type { NextConfig } from "next";
+// next.config.ts
+
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+
+  typedRoutes: true,
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
+
+  typescript: {
+    ignoreBuildErrors: false,
+  },
 };
 
 export default nextConfig;

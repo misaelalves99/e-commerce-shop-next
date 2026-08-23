@@ -1,0 +1,129 @@
+/* src/shared/ui/Select/Select.module.css */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+}
+
+.fieldWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(15, 15, 25, 0.95);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.fieldWrapper:hover {
+  border-color: var(--color-border-strong);
+  background: rgba(19, 19, 30, 0.98);
+}
+
+.withLeftIcon .select {
+  padding-left: 2.4rem;
+}
+
+.hasError {
+  border-color: rgba(250, 0, 63, 0.8);
+  box-shadow: 0 0 0 1px rgba(250, 0, 63, 0.35);
+}
+
+/* Select */
+
+.select {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family-sans);
+  padding-inline: var(--space-3);
+  padding-block: 0.65rem;
+  padding-right: 2.4rem;
+  border-radius: inherit;
+  appearance: none;
+}
+
+.select::placeholder {
+  color: var(--color-text-muted);
+}
+
+.selectError {
+  color: var(--color-on-danger);
+}
+
+.fieldWrapper:has(.select:focus-visible) {
+  border-color: var(--color-border-focus);
+  box-shadow:
+    0 0 0 1px var(--color-bg-page),
+    0 0 0 2px rgba(0, 0, 255, 0.7);
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(0, 0, 255, 0.12),
+      transparent 65%
+    ),
+    rgba(17, 17, 26, 0.98);
+}
+
+/* Ícones */
+
+.iconLeft,
+.iconRight {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.iconLeft {
+  left: 0.75rem;
+}
+
+.iconRight {
+  right: 0.75rem;
+}
+
+/* Helper & error */
+
+.helperText {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.errorText {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+}
+
+/* Mobile tweaks */
+
+@media (max-width: 480px) {
+  .select {
+    padding-block: 0.55rem;
+    font-size: var(--font-size-xs);
+  }
+}

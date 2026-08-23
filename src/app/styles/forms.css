@@ -1,0 +1,235 @@
+/* src/app/styles/forms.css */
+
+/* ========================================================================
+ * FORMULÁRIOS - E-COMMERCE SHOP NEXT
+ * Inputs, selects, textareas, checkbox, radio e estados de erro.
+ * ===================================================================== */
+
+/* Wrapper padrão de grupo de campo */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+  margin-bottom: var(--space-4);
+}
+
+.form-field--inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Label */
+
+.form-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.form-label span.required {
+  color: var(--color-danger);
+  margin-left: 0.125rem;
+}
+
+/* Hint / descrição do campo */
+
+.form-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Mensagem de erro */
+
+.form-error {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+}
+
+/* Inputs base (reaproveitando token .input-base) */
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  min-height: var(--input-height-md);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  border-radius: var(--input-radius);
+  border: var(--input-border-width) solid var(--color-border-subtle);
+  background: var(--color-bg-input);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  background: var(--color-bg-input-hover);
+}
+
+.input:focus-visible,
+.textarea:focus-visible,
+.select:focus-visible {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-border-focus);
+}
+
+/* Input com erro */
+
+.input--error,
+.textarea--error,
+.select--error {
+  border-color: var(--color-border-error);
+  box-shadow: 0 0 0 1px var(--color-border-error);
+}
+
+/* Input desabilitado */
+
+.input:disabled,
+.textarea:disabled,
+.select:disabled {
+  background: var(--color-bg-input-disabled);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+/* Textarea */
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Select */
+
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem; /* espaço para ícone de seta */
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
+    linear-gradient(135deg, var(--color-text-muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 9px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* Checkbox & Radio (container) */
+
+.form-check-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Checkbox & radio custom (input + pseudo) */
+
+.form-check-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-input);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    box-shadow var(--transition-fast);
+}
+
+.form-check-input[type='radio'] {
+  border-radius: 999px;
+}
+
+.form-check-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--color-border-focus);
+  border-color: var(--color-border-focus);
+}
+
+.form-check-input:checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-brand-glow);
+}
+
+.form-check-input:checked::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: inherit;
+  background: var(--color-on-primary);
+}
+
+/* Grupo horizontal de campos (ex: Nome / Sobrenome, CPF / Data Nasc.) */
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.form-row > .form-field {
+  flex: 1 1 160px;
+}
+
+/* Layout do formulário (para páginas de login, register, checkout) */
+
+.form-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* Botão de submit alinhado à direita (desktop) */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.form-actions--center {
+  justify-content: center;
+}
+
+/* Ajustes responsivos */
+
+@media (max-width: 640px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,555 @@
+/* src/app/styles/tokens.css */
+
+/* ========================================================================
+ * SISTEMA DE TOKENS - E-COMMERCE SHOP NEXT
+ * Identidade visual moderna inspirada em Shopee / Shein / Amazon,
+ * com foco em conversão, legibilidade e responsividade.
+ * ===================================================================== */
+
+:root {
+  /* =====================================================================
+   * 1. PALETA PRIMITIVA
+   * =================================================================== */
+
+  /* Paleta principal */
+  --color-blue-500:   #0000ff; /* Primária da marca */
+  --color-orange-500: #ee6123;
+  --color-yellow-300: #f5ee9e;
+  --color-pink-500:   #fa003f;
+  --color-green-500:  #00916e;
+
+  /* Neutros (dark commerce premium) */
+  --color-gray-950: #050508;
+  --color-gray-900: #0b0b10;
+  --color-gray-850: #101018;
+  --color-gray-800: #15151f;
+  --color-gray-750: #1a1a26;
+  --color-gray-700: #1e1e2a;
+  --color-gray-650: #252535;
+  --color-gray-600: #2b2b3a;
+  --color-gray-500: #4b4b5f;
+  --color-gray-400: #7a7a90;
+  --color-gray-300: #a5a5bd;
+  --color-gray-200: #d1d1e3;
+  --color-gray-100: #f3f3ff;
+  --color-white:    #ffffff;
+
+  /* Auxiliares de gradiente */
+  --color-blue-600:  #0000d6;
+  --color-blue-700:  #0000ac;
+  --color-pink-600:  #d10035;
+  --color-orange-600:#d5531f;
+
+  /* =====================================================================
+   * 2. CORES SEMÂNTICAS (PARA COMPONENTES)
+   * =================================================================== */
+
+  /* Marca & CTAs */
+  --color-brand:              var(--color-blue-500);
+  --color-brand-soft:         rgba(0, 0, 255, 0.12);
+  --color-brand-soft-strong:  rgba(0, 0, 255, 0.22);
+  --color-brand-strong:       #0000c8;
+
+  --color-primary:            var(--color-brand);
+  --color-primary-hover:      #0000d0;
+  --color-primary-active:     #0000aa;
+  --color-primary-subtle:     rgba(0, 0, 255, 0.08);
+  --color-on-primary:         var(--color-white);
+  --color-primary-outline:    rgba(0, 0, 255, 0.65);
+
+  /* Ações secundárias (promoções/quentes) */
+  --color-secondary:          var(--color-orange-500);
+  --color-secondary-hover:    var(--color-orange-600);
+  --color-secondary-active:   #c24619;
+  --color-on-secondary:       var(--color-white);
+
+  /* Destaques (preço, selo de oferta, badges) */
+  --color-accent:             var(--color-pink-500);
+  --color-accent-hover:       var(--color-pink-600);
+  --color-accent-soft:        rgba(250, 0, 63, 0.12);
+  --color-accent-soft-strong: rgba(250, 0, 63, 0.22);
+  --color-on-accent:          var(--color-white);
+
+  /* Feedback de estado */
+  --color-success:            var(--color-green-500);
+  --color-success-soft:       rgba(0, 145, 110, 0.15);
+  --color-on-success:         var(--color-white);
+
+  --color-warning:            var(--color-yellow-300);
+  --color-warning-soft:       rgba(245, 238, 158, 0.25);
+  --color-on-warning:         #3a3200;
+
+  --color-danger:             var(--color-pink-500);
+  --color-danger-soft:        rgba(250, 0, 63, 0.18);
+  --color-on-danger:          var(--color-white);
+
+  /* Fundo e superfícies (dark commerce premium) */
+  --color-bg-body:            radial-gradient(circle at top, #15151f 0, #050508 55%, #000000 100%);
+  --color-bg-page:            var(--color-gray-950);
+  --color-bg-surface:         #11111b;
+  --color-bg-surface-soft:    rgba(255, 255, 255, 0.02);
+  --color-bg-surface-strong:  #181824;
+  --color-bg-elevated:        #1b1b28;
+  --color-bg-header:          rgba(5, 5, 15, 0.92);
+  --color-bg-header-strong:   radial-gradient(circle at top left, rgba(0, 0, 255, 0.24), rgba(0, 0, 0, 0.9));
+  --color-bg-footer:          #05050a;
+  --color-bg-chip:            rgba(255, 255, 255, 0.04);
+  --color-bg-input:           rgba(255, 255, 255, 0.03);
+  --color-bg-input-hover:     rgba(255, 255, 255, 0.06);
+  --color-bg-input-disabled:  rgba(255, 255, 255, 0.02);
+
+  /* Texto */
+  --color-text-primary:       #f5f5ff;
+  --color-text-secondary:     #c1c1d7;
+  --color-text-muted:         #8b8ba5;
+  --color-text-soft:          #a3a3c2;
+  --color-text-inverse:       #050508;
+  --color-text-link:          #7ea5ff;
+  --color-text-link-hover:    #a8c0ff;
+  --color-text-placeholder:   #686883;
+
+  /* Bordas e divisores */
+  --color-border-subtle:      rgba(255, 255, 255, 0.06);
+  --color-border-soft:        rgba(255, 255, 255, 0.1);
+  --color-border-strong:      rgba(255, 255, 255, 0.18);
+  --color-border-focus:       rgba(0, 0, 255, 0.75);
+  --color-border-error:       rgba(250, 0, 63, 0.85);
+
+  /* Overlays, sombras e glow */
+  --color-backdrop:           rgba(0, 0, 0, 0.7);
+  --shadow-soft:              0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-strong:            0 20px 40px rgba(0, 0, 0, 0.7);
+  --shadow-elevated:          0 16px 40px rgba(3, 7, 18, 0.85);
+
+  --shadow-brand-glow:        0 0 22px rgba(0, 0, 255, 0.45);
+  --shadow-accent-glow:       0 0 26px rgba(250, 0, 63, 0.5);
+  --shadow-card-glow-soft:    0 0 18px rgba(126, 165, 255, 0.25);
+
+  /* =====================================================================
+   * 3. TIPOGRAFIA
+   * =================================================================== */
+
+  --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                      Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
+  /* Tamanhos */
+  --font-size-xs:    0.75rem;  /* 12px */
+  --font-size-sm:    0.875rem; /* 14px */
+  --font-size-md:    1rem;     /* 16px */
+  --font-size-lg:    1.125rem; /* 18px */
+  --font-size-xl:    1.5rem;   /* 24px */
+  --font-size-2xl:   2rem;     /* 32px */
+  --font-size-3xl:   2.5rem;   /* 40px */
+  --font-size-4xl:   3rem;     /* 48px */
+
+  /* Pesos */
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+  --font-weight-extrabold:800;
+
+  /* Alturas de linha */
+  --line-height-tight:    1.1;
+  --line-height-base:     1.4;
+  --line-height-relaxed:  1.6;
+
+  /* Tokens semânticos de texto (para classes utilitárias) */
+  --text-body-size:       var(--font-size-md);
+  --text-body-line:       var(--line-height-relaxed);
+
+  --text-caption-size:    var(--font-size-xs);
+  --text-caption-line:    1.3;
+
+  --text-heading-sm-size: var(--font-size-xl);
+  --text-heading-sm-line: var(--line-height-tight);
+
+  --text-heading-md-size: var(--font-size-2xl);
+  --text-heading-md-line: var(--line-height-tight);
+
+  --text-heading-lg-size: var(--font-size-3xl);
+  --text-heading-lg-line: var(--line-height-tight);
+
+  /* =====================================================================
+   * 4. ESPAÇAMENTO (SCALE)
+   * =================================================================== */
+
+  /* Base: 4px */
+  --space-0:    0;
+  --space-0-5:  0.125rem; /* 2px  */
+  --space-1:    0.25rem;  /* 4px  */
+  --space-1-5:  0.375rem; /* 6px  */
+  --space-2:    0.5rem;   /* 8px  */
+  --space-2-5:  0.625rem; /* 10px */
+  --space-3:    0.75rem;  /* 12px */
+  --space-3-5:  0.875rem; /* 14px */
+  --space-4:    1rem;     /* 16px */
+  --space-5:    1.25rem;  /* 20px */
+  --space-6:    1.5rem;   /* 24px */
+  --space-7:    1.75rem;  /* 28px */
+  --space-8:    2rem;     /* 32px */
+  --space-10:   2.5rem;   /* 40px */
+  --space-12:   3rem;     /* 48px */
+  --space-16:   4rem;     /* 64px */
+  --space-20:   5rem;     /* 80px */
+  --space-24:   6rem;     /* 96px */
+
+  /* Atalhos semânticos para layout */
+  --space-page-x:        var(--space-4);
+  --space-page-y:        var(--space-6);
+  --space-section-y:     var(--space-10);
+  --space-card-gap:      var(--space-4);
+  --space-grid-gap:      var(--space-4);
+
+  /* Gaps específicos */
+  --gap-grid-products:   var(--space-4);
+  --gap-grid-cards:      var(--space-3);
+  --gap-form-fields:     var(--space-3);
+
+  /* =====================================================================
+   * 5. RADIUS
+   * =================================================================== */
+
+  --radius-xs:    4px;
+  --radius-sm:    6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-pill: 999px;
+
+  /* =====================================================================
+   * 6. BREAKPOINTS & CONTAINERS
+   * =================================================================== */
+
+  --bp-xs:  360px;
+  --bp-sm:  640px;
+  --bp-md:  768px;
+  --bp-lg:  1024px;
+  --bp-xl:  1280px;
+  --bp-2xl: 1440px;
+
+  /* max-width padrão para páginas e seções */
+  --container-xs: 100%;
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1200px;
+  --container-2xl: 1320px;
+
+  /* =====================================================================
+   * 7. CAMADAS (Z-INDEX) & HEADER
+   * =================================================================== */
+
+  --header-height:        64px;
+  --header-height-lg:     72px;
+
+  --z-header:             40;
+  --z-header-overlay:     45;
+  --z-overlay:            50;
+  --z-modal:              60;
+  --z-drawer:             55;
+  --z-toast:              70;
+  --z-skeleton:           10;
+
+  /* =====================================================================
+   * 8. ANIMAÇÕES & TRANSIÇÕES
+   * =================================================================== */
+
+  --transition-fast:      150ms ease-out;
+  --transition-base:      200ms ease-out;
+  --transition-slow:      300ms ease;
+  --transition-bounce:    220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --easing-standard:      cubic-bezier(0.2, 0.8, 0.2, 1);
+  --easing-soft:          cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* =====================================================================
+   * 9. TOKENS ESPECÍFICOS DE COMPONENTES
+   * =================================================================== */
+
+  /* Buttons */
+  --btn-height-sm:        2.25rem;
+  --btn-height-md:        2.75rem;
+  --btn-height-lg:        3rem;
+  --btn-padding-x-sm:     var(--space-3);
+  --btn-padding-x-md:     var(--space-4);
+  --btn-padding-x-lg:     var(--space-5);
+  --btn-radius:           var(--radius-pill);
+  --btn-font-size-sm:     var(--font-size-sm);
+  --btn-font-size-md:     var(--font-size-md);
+
+  /* Cards */
+  --card-radius:          var(--radius-lg);
+  --card-padding:         var(--space-4);
+  --card-padding-lg:      var(--space-5);
+  --card-border-color:    var(--color-border-subtle);
+  --card-bg:              var(--color-bg-surface);
+  --card-bg-hover:        var(--color-bg-surface-strong);
+
+  /* Product cards */
+  --product-card-min-width:  220px;
+  --product-card-max-width:  320px;
+  --product-card-radius:     var(--radius-md);
+  --product-card-padding:    var(--space-3);
+
+  /* Badges & Chips */
+  --badge-radius:         var(--radius-pill);
+  --badge-padding-x:      var(--space-2);
+  --badge-padding-y:      0.2rem;
+
+  /* Inputs / Forms */
+  --input-height-sm:      2.5rem;
+  --input-height-md:      2.75rem;
+  --input-padding-x:      var(--space-3);
+  --input-padding-y:      0.55rem;
+  --input-radius:         var(--radius-md);
+  --input-border-width:   1px;
+
+  /* Skeleton */
+  --skeleton-radius:      var(--radius-sm);
+  --skeleton-bg:          rgba(255, 255, 255, 0.06);
+  --skeleton-shine:       rgba(255, 255, 255, 0.18);
+
+  /* Drawer / Mini-cart */
+  --drawer-width-sm:      100%;
+  --drawer-width-md:      420px;
+  --drawer-width-lg:      480px;
+
+  /* Toast / Feedback */
+  --toast-radius:         var(--radius-lg);
+  --toast-padding-x:      var(--space-4);
+  --toast-padding-y:      var(--space-3);
+
+  /* Grade de produtos */
+  --product-grid-min-column: 220px;
+  --product-grid-max-column: 1fr;
+}
+
+/* =======================================================================
+ * 10. AJUSTES RESPONSIVOS
+ * ===================================================================== */
+
+@media (min-width: 640px) {
+  :root {
+    --space-page-x:    var(--space-6);
+    --space-page-y:    var(--space-8);
+    --space-section-y: var(--space-12);
+    --header-height:   68px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --space-page-x:    var(--space-8);
+    --space-page-y:    var(--space-12);
+    --space-section-y: var(--space-16);
+    --header-height:   var(--header-height-lg);
+  }
+}
+
+/* =======================================================================
+ * 11. ESTILOS BASE (BODY, CONTAINER, UTILITÁRIOS)
+ * ===================================================================== */
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-line);
+  background: var(--color-bg-body);
+  color: var(--color-text-primary);
+}
+
+/* Container padrão das páginas */
+.page-container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: var(--space-page-y) var(--space-page-x);
+}
+
+/* Versão full-width (para hero / banners home) */
+.page-container--wide {
+  max-width: var(--container-2xl);
+}
+
+/* Header fixo com blur */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  backdrop-filter: blur(18px);
+  background: var(--color-bg-header);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+/* Card genérico */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--card-border-color);
+  box-shadow: var(--shadow-soft);
+  padding: var(--card-padding);
+}
+
+/* Botão primário */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.5rem;
+  min-height: var(--btn-height-md);
+  border-radius: var(--btn-radius);
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-blue-600));
+  color: var(--color-on-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--btn-font-size-sm);
+  transition:
+    background-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-fast);
+  box-shadow: var(--shadow-brand-glow);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-primary-hover), var(--color-blue-700));
+  box-shadow: var(--shadow-strong);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  background: var(--color-primary-active);
+  transform: translateY(0);
+}
+
+/* Botão secundário (outline) */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.7rem 1.3rem;
+  min-height: var(--btn-height-md);
+  border-radius: var(--btn-radius);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: transparent;
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--btn-font-size-sm);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Badge de desconto / oferta */
+.badge-discount {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--badge-radius);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Grid responsivo de produtos */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(var(--product-grid-min-column), var(--product-grid-max-column))
+  );
+  gap: var(--gap-grid-products);
+}
+
+/* Card de produto com hover sutil */
+.product-card {
+  background: var(--card-bg);
+  border-radius: var(--product-card-radius);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--product-card-padding);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-fast),
+    background var(--transition-base);
+}
+
+.product-card:hover {
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-card-glow-soft);
+  transform: translateY(-2px);
+  background: radial-gradient(circle at top, rgba(0, 0, 255, 0.16), var(--card-bg));
+}
+
+/* Utilitários rápidos (podem ser usados em globals.css via @layer) */
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.section-spacing {
+  padding-block: var(--space-section-y);
+}
+
+.section-title {
+  font-size: var(--text-heading-md-size);
+  line-height: var(--text-heading-md-line);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+}
+
+.section-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* Inputs base (serão refinados em forms.css) */
+.input-base {
+  width: 100%;
+  min-height: var(--input-height-md);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  border-radius: var(--input-radius);
+  border: var(--input-border-width) solid var(--color-border-subtle);
+  background: var(--color-bg-input);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    box-shadow var(--transition-fast);
+}
+
+.input-base::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.input-base:hover {
+  background: var(--color-bg-input-hover);
+}
+
+.input-base:focus-visible {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-border-focus);
+}
+
+/* Fim tokens base */

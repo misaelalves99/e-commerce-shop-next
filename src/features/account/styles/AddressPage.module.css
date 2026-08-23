@@ -1,0 +1,121 @@
+/* src/features/account/styles/AddressPage.module.css */
+
+.page {
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: var(--space-page-y) var(--space-page-x);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.headerTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.headerTitleIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle at 0 0,
+    rgba(0, 145, 110, 0.7),
+    rgba(0, 0, 0, 0.4)
+  );
+  box-shadow: 0 0 24px rgba(0, 145, 110, 0.45);
+}
+
+.headerTitle {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+}
+
+.headerSubtitle {
+  max-width: 540px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr);
+  gap: var(--space-6);
+}
+
+/* Card com resumo / dicas de endereço */
+
+.addressSummaryCard {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-4);
+}
+
+.addressSummaryTitle {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+}
+
+.addressSummaryText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.addressSummaryList {
+  padding-left: 1.1rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.addressSummaryList li::marker {
+  color: var(--color-accent);
+}
+
+/* Badge para endereço padrão (caso o componente use) */
+
+.defaultAddressBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.15rem 0.6rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--color-success-soft);
+  color: var(--color-on-success);
+  border: 1px solid rgba(0, 145, 110, 0.55);
+}
+
+/* Responsivo */
+
+@media (min-width: 900px) {
+  .content {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+    align-items: flex-start;
+  }
+
+  .addressSummaryCard {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-4));
+  }
+}

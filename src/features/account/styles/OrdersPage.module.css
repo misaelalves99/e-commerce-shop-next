@@ -1,0 +1,294 @@
+/* src/features/account/styles/OrdersPage.module.css */
+
+.page {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: var(--space-page-y) var(--space-page-x);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.headerTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.headerTitleIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle at 0 0,
+    rgba(250, 0, 63, 0.75),
+    rgba(0, 0, 0, 0.4)
+  );
+  box-shadow: var(--shadow-accent-glow);
+}
+
+.headerTitle {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+}
+
+.headerSubtitle {
+  max-width: 560px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* ================================
+ * ESTILOS GLOBAIS PARA ORDER LIST
+ * (usados por OrderList/OrderCard)
+ * ================================ */
+
+:global(.order-list) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+:global(.order-list__summary) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+:global(.order-list__summary-text) {
+  margin: 0;
+}
+
+:global(.order-list__grid) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+/* Card de pedido */
+
+:global(.order-card) {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 255, 0.04),
+      rgba(250, 0, 63, 0.05)
+    ),
+    var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition:
+    box-shadow var(--transition-base),
+    transform var(--transition-fast),
+    border-color var(--transition-base),
+    background var(--transition-base);
+}
+
+:global(.order-card:hover) {
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-strong);
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 255, 0.08),
+      rgba(250, 0, 63, 0.09)
+    ),
+    var(--color-bg-surface);
+}
+
+:global(.order-card__header) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+:global(.order-card__title-group) {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+:global(.order-card__icon) {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-border-subtle);
+}
+
+:global(.order-card__title) {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+:global(.order-card__meta) {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+:global(.order-card__body) {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+:global(.order-card__row) {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-size: var(--font-size-sm);
+}
+
+:global(.order-card__label) {
+  color: var(--color-text-muted);
+}
+
+:global(.order-card__value) {
+  font-weight: var(--font-weight-medium);
+}
+
+:global(.order-card__value--payment) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+:global(.order-card__value-icon) {
+  font-size: 0.85rem;
+}
+
+:global(.order-card__footer) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+:global(.order-card__total-label) {
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+:global(.order-card__total-value) {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Status badge */
+
+:global(.status-badge) {
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.7rem;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid transparent;
+}
+
+:global(.status-badge--warning) {
+  background: var(--color-warning-soft);
+  color: var(--color-on-warning);
+  border-color: rgba(245, 238, 158, 0.6);
+}
+
+:global(.status-badge--info) {
+  background: rgba(126, 165, 255, 0.18);
+  color: #c7d2ff;
+  border-color: rgba(126, 165, 255, 0.5);
+}
+
+:global(.status-badge--accent) {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-color: rgba(250, 0, 63, 0.6);
+}
+
+:global(.status-badge--success) {
+  background: var(--color-success-soft);
+  color: var(--color-on-success);
+  border-color: rgba(0, 145, 110, 0.65);
+}
+
+:global(.status-badge--danger) {
+  background: var(--color-danger-soft);
+  color: var(--color-on-danger);
+  border-color: rgba(250, 0, 63, 0.5);
+}
+
+/* Empty state */
+
+:global(.empty-state) {
+  border-radius: var(--radius-xl);
+  border: 1px dashed var(--color-border-subtle);
+  padding: var(--space-6) var(--space-4);
+  background: radial-gradient(
+      circle at top,
+      rgba(0, 0, 255, 0.12),
+      transparent 65%
+    ),
+    var(--color-bg-surface-soft);
+  text-align: center;
+}
+
+:global(.empty-state__content) {
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+:global(.empty-state__title) {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+:global(.empty-state__description) {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+:global(.empty-state__action) {
+  margin-top: var(--space-2);
+}
+
+/* Responsivo */
+
+@media (min-width: 768px) {
+  :global(.order-list__grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  :global(.order-list__grid) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,505 @@
+/* src/shared/layout/Header/Header.module.css */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  backdrop-filter: blur(18px);
+  background: var(--color-bg-header);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+/* ===========================
+ * TOP BAR
+ * ========================= */
+
+.topBar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(0, 0, 255, 0.35),
+      transparent 50%
+    ),
+    rgba(5, 5, 16, 0.98);
+}
+
+.topBarContent {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0.4rem var(--space-page-x);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--font-size-xs);
+}
+
+.topBarHighlight {
+  padding: 0.1rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.topBarText {
+  color: var(--color-text-secondary);
+}
+
+/* ===========================
+ * MAIN BAR
+ * ========================= */
+
+.mainBar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(
+      120deg,
+      rgba(0, 0, 20, 0.98),
+      rgba(5, 5, 16, 0.98)
+    );
+}
+
+.mainBarInner {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0.7rem var(--space-page-x);
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 2.2fr) minmax(0, 1.7fr);
+  align-items: center;
+  column-gap: 1.2rem;
+}
+
+/* Brand */
+
+.brandArea {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.menuButton {
+  display: none;
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-pill);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.menuButton:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-1px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.logoMark {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 1rem;
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(0, 0, 255, 0.55),
+      transparent 60%
+    ),
+    linear-gradient(135deg, #0000ff, #fa003f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--color-on-primary);
+  box-shadow: var(--shadow-brand-glow);
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.logoName {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.03em;
+}
+
+.logoTagline {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* ===========================
+ * SEARCH DESKTOP
+ * ========================= */
+
+.searchWrapper {
+  display: block;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-surface-soft);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.3);
+}
+
+.searchIcon {
+  margin-left: 0.4rem;
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.searchButton {
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  padding: 0.45rem 1.1rem;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: var(--shadow-brand-glow);
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+}
+
+.searchButton:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* ===========================
+ * ACTIONS (RIGHT SIDE)
+ * ========================= */
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.iconAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.35rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.iconAction:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}
+
+.iconBadgeWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.iconBadge {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.45rem;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 0.64rem;
+  font-weight: var(--font-weight-semibold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 0.2rem;
+  box-shadow: var(--shadow-accent-glow);
+}
+
+.iconLabel {
+  display: inline-block;
+}
+
+/* User */
+
+.userArea {
+  display: flex;
+  align-items: center;
+}
+
+.loginButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--color-border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  text-decoration: none;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.loginButton:hover {
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(0, 0, 255, 0.16),
+      transparent 60%
+    );
+  border-color: var(--color-primary);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}
+
+.loginIcon {
+  font-size: 1.1rem;
+}
+
+/* ===========================
+ * NAVBAR (SECONDARY)
+ * ========================= */
+
+.navBar {
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.98),
+    rgba(15, 23, 42, 0.96)
+  );
+}
+
+.navInner {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0.2rem var(--space-page-x);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+/* Oculta scrollbar em WebKit sem quebrar acessibilidade */
+.navInner::-webkit-scrollbar {
+  height: 4px;
+}
+.navInner::-webkit-scrollbar-track {
+  background: transparent;
+}
+.navInner::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.45);
+  border-radius: 999px;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.navLink:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}
+
+.navLinkActive {
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(0, 0, 255, 0.36),
+      transparent 60%
+    ),
+    rgba(15, 23, 42, 0.98);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-brand-glow);
+}
+
+.navIcon {
+  font-size: 1rem;
+}
+
+.navLabel {
+  font-weight: var(--font-weight-medium);
+}
+
+/* ===========================
+ * MOBILE SEARCH
+ * ========================= */
+
+.mobileSearch {
+  display: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--color-bg-page);
+}
+
+.mobileSearchForm {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0.55rem var(--space-page-x);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mobileSearchIcon {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+}
+
+.mobileSearchInput {
+  flex: 1;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  background: rgba(15, 23, 42, 0.9);
+  padding: 0.45rem 0.8rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.mobileSearchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ===========================
+ * RESPONSIVO
+ * ========================= */
+
+@media (max-width: 1024px) {
+  .mainBarInner {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
+    row-gap: 0.6rem;
+  }
+
+  .searchWrapper {
+    grid-column: 1 / -1;
+  }
+
+  .actions {
+    justify-content: flex-end;
+  }
+
+  .logoTagline {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainBarInner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .searchWrapper {
+    display: none;
+  }
+
+  .mobileSearch {
+    display: block;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .actions {
+    gap: 0.7rem;
+  }
+
+  .iconLabel {
+    display: none;
+  }
+
+  .topBarContent {
+    padding-inline: var(--space-3);
+  }
+
+  .mainBarInner {
+    padding-inline: var(--space-3);
+  }
+
+  .navInner {
+    padding-inline: var(--space-3);
+  }
+
+  .mobileSearchForm {
+    padding-inline: var(--space-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .logoName {
+    font-size: var(--font-size-sm);
+  }
+
+  .logoMark {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.9rem;
+  }
+
+  .topBarText {
+    display: none;
+  }
+}

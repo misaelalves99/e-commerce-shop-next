@@ -1,0 +1,213 @@
+/* src/features/home/styles/CategoryStrip.module.css */
+
+.strip {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  margin-top: 0.25rem;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.link {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-link);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.link:hover {
+  color: var(--color-text-link-hover);
+}
+
+.scrollWrapper {
+  position: relative;
+}
+
+.scroll {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  padding-block: var(--space-2);
+  padding-inline: calc(var(--space-page-x) * 0.25);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(122, 122, 144, 0.6) transparent;
+}
+
+.scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: rgba(122, 122, 144, 0.65);
+  border-radius: var(--radius-pill);
+}
+
+.categoryItem {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  min-width: 120px;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-subtle);
+  background: radial-gradient(
+      circle at top left,
+      rgba(0, 0, 255, 0.24),
+      transparent 70%
+    ),
+    rgba(17, 17, 27, 0.95);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+}
+
+.categoryItem:hover {
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+  color: var(--color-text-primary);
+}
+
+.categoryItemIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
+}
+
+.categoryItemLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Botões de navegação laterais (desktop) */
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: radial-gradient(
+    circle at center,
+    rgba(15, 23, 42, 0.98),
+    rgba(15, 23, 42, 0.9)
+  );
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+  color: var(--color-text-primary);
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-fast),
+    border-color var(--transition-base),
+    opacity var(--transition-fast);
+}
+
+.navButtonLeft {
+  left: 0;
+}
+
+.navButtonRight {
+  right: 0;
+}
+
+.navButton:hover {
+  transform: translateY(-50%) translateY(-1px);
+  border-color: var(--color-brand);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 255, 0.75),
+    rgba(15, 23, 42, 0.98)
+  );
+}
+
+.navButtonIcon {
+  font-size: 1rem;
+}
+
+/* Gradientes de borda para indicar conteúdo extra */
+
+.edgeOverlay {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 48px;
+}
+
+.edgeOverlayLeft {
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-page),
+    transparent
+  );
+}
+
+.edgeOverlayRight {
+  right: 0;
+  background: linear-gradient(
+    -90deg,
+    var(--color-bg-page),
+    transparent
+  );
+}
+
+@media (max-width: 767px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .navButton,
+  .edgeOverlay {
+    display: none;
+  }
+
+  .scroll {
+    padding-inline: 0;
+  }
+}
