@@ -1,0 +1,177 @@
+/* src/features/checkout/styles/CheckoutSteps.module.css */
+
+.wrapper {
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+  background: radial-gradient(
+      circle at top left,
+      rgba(0, 0, 255, 0.12),
+      transparent 55%
+    ),
+    rgba(10, 10, 20, 0.96);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-3);
+  align-items: stretch;
+}
+
+.item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+}
+
+/* Estados (sincronizados com CheckoutSteps.tsx) */
+.active {}
+.completed {}
+.upcoming {}
+
+.button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: default;
+  text-align: left;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+}
+
+.completed .button {
+  cursor: pointer;
+}
+
+.indicator {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  background: var(--color-bg-surface-soft);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.textBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.description {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Estado ativo */
+.active .button {
+  background: radial-gradient(
+    circle at top left,
+    rgba(0, 0, 255, 0.32),
+    rgba(5, 5, 15, 0.96)
+  );
+  border-color: var(--color-border-focus);
+  box-shadow: var(--shadow-brand-glow);
+}
+
+.active .indicator {
+  background: var(--color-primary);
+  border-color: transparent;
+  color: var(--color-on-primary);
+}
+
+.active .label {
+  color: var(--color-text-primary);
+}
+
+.active .description {
+  color: var(--color-text-secondary);
+}
+
+/* Estado concluído */
+.completed .button {
+  background: rgba(0, 145, 110, 0.18);
+  border-color: rgba(0, 145, 110, 0.4);
+}
+
+.completed .indicator {
+  background: var(--color-success);
+  border-color: transparent;
+  color: var(--color-on-success);
+}
+
+.completed .label {
+  color: var(--color-text-primary);
+}
+
+.completed .description {
+  color: var(--color-text-secondary);
+}
+
+/* Estado futuro */
+.upcoming .button {
+  opacity: 0.75;
+}
+
+.upcoming .indicator {
+  opacity: 0.8;
+}
+
+/* Linha separadora entre steps */
+.separator {
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  width: 24px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.32),
+    transparent
+  );
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: var(--space-2);
+  }
+
+  .list {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .separator {
+    display: none;
+  }
+}

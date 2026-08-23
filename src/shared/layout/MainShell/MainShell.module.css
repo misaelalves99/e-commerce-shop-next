@@ -1,0 +1,32 @@
+/* src/shared/layout/MainShell/MainShell.module.css */
+
+.shell {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-body);
+  color: var(--color-text-primary);
+}
+
+/* Main */
+
+.main {
+  flex: 1;
+  display: flex;
+}
+
+.pageContainer {
+  flex: 1;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: var(--space-page-y) var(--space-page-x);
+}
+
+/* Responsivo */
+
+@media (max-width: 640px) {
+  .pageContainer {
+    padding-inline: var(--space-3);
+    padding-block: var(--space-5);
+  }
+}

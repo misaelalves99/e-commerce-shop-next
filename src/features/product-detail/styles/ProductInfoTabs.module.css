@@ -1,0 +1,177 @@
+/* src/features/product-detail/styles/ProductInfoTabs.module.css */
+
+.root {
+  margin-top: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.tabList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: radial-gradient(circle at top, rgba(0, 0, 255, 0.16), transparent 60%);
+}
+
+.tab {
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.tab:hover {
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tabActive {
+  background: rgba(0, 0, 255, 0.14);
+  border-color: rgba(0, 0, 255, 0.4);
+  color: var(--color-text-primary);
+}
+
+.tabPanel {
+  padding: var(--space-4);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Typography */
+
+.paragraph {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.paragraphSecondary {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.paragraphMuted {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Specs grid */
+
+.specsGrid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+}
+
+.specItem {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.specLabel {
+  margin: 0 0 0.25rem;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.specValue {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+/* Rating / Reviews */
+
+.ratingHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ratingMain {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: radial-gradient(circle at top left, rgba(250, 0, 63, 0.16), transparent 60%);
+  border: 1px solid rgba(250, 0, 63, 0.4);
+}
+
+.ratingValue {
+  font-size: 1.4rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+}
+
+.ratingStar {
+  font-size: 1rem;
+  color: #facc15;
+}
+
+.ratingText {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.reviewsPlaceholder {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--color-border-subtle);
+}
+
+/* Responsive */
+
+@media (max-width: 639px) {
+  .tabList {
+    gap: 0.25rem;
+  }
+
+  .tabPanel {
+    padding: var(--space-3);
+  }
+
+  .specsGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

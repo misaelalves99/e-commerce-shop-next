@@ -1,0 +1,120 @@
+/* src/shared/ui/TextField/TextField.module.css */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+}
+
+.fieldWrapper {
+  position: relative;
+  display: flex;
+  background: rgba(15, 15, 25, 0.95);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.fieldWrapper:hover {
+  border-color: var(--color-border-strong);
+  background: rgba(19, 19, 30, 0.98);
+}
+
+.withLeftIcon .textarea {
+  padding-left: 2.4rem;
+}
+
+.hasError {
+  border-color: rgba(250, 0, 63, 0.8);
+  box-shadow: 0 0 0 1px rgba(250, 0, 63, 0.35);
+}
+
+/* Textarea */
+
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family-sans);
+  padding-inline: var(--space-3);
+  padding-block: 0.7rem;
+  border-radius: inherit;
+}
+
+.textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.fieldWrapper:has(.textarea:focus-visible) {
+  border-color: var(--color-border-focus);
+  box-shadow:
+    0 0 0 1px var(--color-bg-page),
+    0 0 0 2px rgba(0, 0, 255, 0.7);
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(0, 0, 255, 0.12),
+      transparent 65%
+    ),
+    rgba(17, 17, 26, 0.98);
+}
+
+.textareaError {
+  color: var(--color-on-danger);
+}
+
+/* Ícones */
+
+.iconLeft {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+/* Helper & error */
+
+.helperText {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.errorText {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+}
+
+/* Mobile tweaks */
+
+@media (max-width: 480px) {
+  .textarea {
+    font-size: var(--font-size-xs);
+  }
+}

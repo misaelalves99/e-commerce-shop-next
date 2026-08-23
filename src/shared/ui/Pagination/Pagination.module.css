@@ -1,0 +1,87 @@
+/* src/shared/ui/Pagination/Pagination.module.css */
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+  font-family: var(--font-family-sans);
+}
+
+/* Botões */
+
+.pageButton {
+  min-width: 2rem;
+  height: 2rem;
+  padding-inline: 0.4rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+}
+
+.pageButton:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}
+
+.pageButton:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+/* Página ativa */
+
+.pageButtonActive {
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(0, 0, 255, 0.26),
+      transparent 60%
+    ),
+    var(--color-primary);
+  border-color: rgba(0, 0, 255, 0.9);
+  color: var(--color-on-primary);
+  box-shadow: var(--shadow-brand-glow);
+}
+
+/* Ellipsis */
+
+.ellipsis {
+  min-width: 1.5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+/* Responsivo */
+
+@media (max-width: 480px) {
+  .container {
+    gap: 0.15rem;
+  }
+
+  .pageButton {
+    min-width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.7rem;
+  }
+
+  .ellipsis {
+    min-width: 1.2rem;
+  }
+}

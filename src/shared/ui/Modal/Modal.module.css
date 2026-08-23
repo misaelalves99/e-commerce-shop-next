@@ -1,0 +1,127 @@
+/* src/shared/ui/Modal/Modal.module.css */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: var(--color-backdrop);
+  backdrop-filter: blur(14px);
+}
+
+.dialog {
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 4rem);
+  border-radius: var(--radius-xl);
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(0, 0, 255, 0.12),
+      transparent 60%
+    ),
+    var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-strong);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  animation: modal-in var(--transition-slow) var(--easing-standard);
+}
+
+.sizeSm {
+  max-width: 380px;
+}
+
+.sizeMd {
+  max-width: 560px;
+}
+
+.sizeLg {
+  max-width: 780px;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.closeButton {
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.closeButton:hover {
+  background: rgba(250, 0, 63, 0.16);
+  color: var(--color-danger);
+  transform: translateY(-1px);
+}
+
+.closeButton:active {
+  transform: translateY(0);
+}
+
+/* Corpo */
+
+.body {
+  overflow-y: auto;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Animação */
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsivo */
+
+@media (max-width: 640px) {
+  .backdrop {
+    padding: var(--space-2);
+  }
+
+  .dialog {
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+  }
+
+  .title {
+    font-size: var(--font-size-md);
+  }
+}

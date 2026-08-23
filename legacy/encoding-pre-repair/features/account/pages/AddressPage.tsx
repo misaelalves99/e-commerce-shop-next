@@ -1,0 +1,77 @@
+﻿// src/features/account/pages/AddressPage.tsx
+'use client';
+
+import { useState } from 'react';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+
+import { useAuth } from '@/core/hooks/useAuth';
+import type { AddressData } from '@/core/types/address';
+import AddressForm from '@/features/checkout/components/AddressForm';
+
+import styles from '../styles/AddressPage.module.css';
+
+export default function AddressPage() {
+  const { address, updateAddress } = useAuth();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const handleSubmit = async (values: AddressData) => {
+    setServerError(null);
+    setSuccessMessage(null);
+    setIsSubmitting(true);
+
+    try {
+      await updateAddress(values);
+      setSuccessMessage('EndereÃ§o atualizado com sucesso.');
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'NÃ£o foi possÃ­vel salvar o endereÃ§o. Tente novamente.';
+      setServerError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <div className={styles.headerTitleGroup}>
+          <span className={styles.headerIcon}>
+            <FaMapMarkerAlt />
+          </span>
+          <div>
+            <h1 className={styles.headerTitle}>EndereÃ§o principal</h1>
+            <p className={styles.headerSubtitle}>
+              Defina o endereÃ§o padrÃ£o usado no checkout para entrega dos seus
+              pedidos.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <main className={styles.content}>
+        <section className={styles.section}>
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <h2 className={styles.cardTitle}>EndereÃ§o de entrega</h2>
+              <p className={styles.cardSubtitle}>
+                VocÃª pode alterar esses dados sempre que necessÃ¡rio antes de
+                finalizar um pedido.
+              </p>
+            </div>
+
+            <AddressForm
+              initialValue={address ?? undefined}
+              onSubmit={handleSubmit}
+            />
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+

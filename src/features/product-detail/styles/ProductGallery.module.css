@@ -1,0 +1,111 @@
+/* src/features/product-detail/styles/ProductGallery.module.css */
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.main {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 1:1 */
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: radial-gradient(circle at top, rgba(0, 0, 255, 0.25), #050508);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.mainImage {
+  object-fit: contain;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.placeholderText {
+  opacity: 0.8;
+}
+
+/* Thumbnails */
+
+.thumbsRow {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(70px, 1fr);
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--color-border-subtle);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.thumbsRow::-webkit-scrollbar {
+  height: 6px;
+}
+
+.thumbsRow::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.thumbsRow::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+
+.thumbButton {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.thumbButton:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.thumbButtonActive {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px rgba(0, 0, 255, 0.5);
+}
+
+.thumbImage {
+  object-fit: contain;
+}
+
+.thumbPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(0, 0, 0, 0.35)
+  );
+}
+
+/* Responsive tweaks */
+
+@media (max-width: 639px) {
+  .thumbsRow {
+    grid-auto-columns: 64px;
+  }
+}

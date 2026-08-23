@@ -1,0 +1,212 @@
+/* src/features/auth/styles/RegisterPage.module.css */
+
+.page {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: var(--space-page-y) var(--space-page-x);
+}
+
+.content {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 1fr);
+  gap: var(--space-10);
+  align-items: center;
+}
+
+/* ===== Hero (lado esquerdo) ===== */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: rgba(250, 0, 63, 0.16);
+  color: var(--color-accent);
+  border: 1px solid rgba(250, 0, 63, 0.4);
+}
+
+.heroTitle {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.04em;
+  color: var(--color-text-primary);
+}
+
+.heroHighlight {
+  background: linear-gradient(
+    120deg,
+    var(--color-accent),
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  max-width: 32rem;
+}
+
+.heroList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.heroList li::before {
+  content: '•';
+  margin-right: 0.45rem;
+  color: var(--color-accent);
+}
+
+.heroFootnote {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.heroLink {
+  color: var(--color-text-link);
+  font-weight: var(--font-weight-medium);
+}
+
+.heroLink:hover {
+  color: var(--color-text-link-hover);
+}
+
+/* ===== Painel (lado direito) ===== */
+
+.panel {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.panelCard {
+  width: 100%;
+  max-width: 440px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-subtle);
+  background:
+    radial-gradient(circle at top right, rgba(250, 0, 63, 0.2), transparent 55%),
+    var(--color-bg-surface);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.panelHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.panelTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.panelSubtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Divider */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.24),
+    transparent
+  );
+}
+
+.dividerLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Rodapé do card */
+
+.footerText {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.footerLink {
+  color: var(--color-text-link);
+  font-weight: var(--font-weight-medium);
+}
+
+.footerLink:hover {
+  color: var(--color-text-link-hover);
+}
+
+/* ===== Responsivo ===== */
+
+@media (max-width: 960px) {
+  .content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+
+  .panel {
+    justify-content: center;
+  }
+
+  .panelCard {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: var(--space-6);
+  }
+
+  .heroTitle {
+    font-size: var(--font-size-2xl);
+  }
+
+  .panelCard {
+    padding: var(--space-5) var(--space-4);
+  }
+}

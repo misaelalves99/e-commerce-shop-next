@@ -1,0 +1,118 @@
+/* src/features/account/styles/ProfilePage.module.css */
+
+.page {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: var(--space-page-y) var(--space-page-x);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.headerTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.headerTitleIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle at 0 0,
+    rgba(0, 0, 255, 0.65),
+    rgba(0, 0, 0, 0.4)
+  );
+  box-shadow: var(--shadow-brand-glow);
+}
+
+.headerTitle {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+}
+
+.headerSubtitle {
+  max-width: 520px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.sidePanel {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 255, 0.06),
+      rgba(250, 0, 63, 0.06)
+    ),
+    var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-soft);
+}
+
+.sidePanelTitle {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+}
+
+.sidePanelText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.sidePanelList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidePanelItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.sidePanelItemDot {
+  margin-top: 0.35rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-brand);
+  box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.2);
+}
+
+@media (min-width: 768px) {
+  .contentGrid {
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr);
+    align-items: flex-start;
+  }
+}

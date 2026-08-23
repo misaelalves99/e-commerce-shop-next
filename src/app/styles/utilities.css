@@ -1,0 +1,299 @@
+/* src/app/styles/utilities.css */
+
+/* ========================================================================
+ * UTILITÁRIOS GERAIS - LAYOUT, GRID, ESPAÇAMENTO, ESTADOS
+ * Pensados para vitrine, listagens, banners e componentes globais.
+ * ===================================================================== */
+
+/* Layout básico */
+
+.section {
+  padding-block: var(--space-section-y);
+}
+
+.section--tight {
+  padding-block: var(--space-6);
+}
+
+.section-header {
+  margin-bottom: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.section-header--center {
+  align-items: center;
+  text-align: center;
+}
+
+/* Grid genérico */
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.grid-2 {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid-3 {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.grid-4 {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+/* Flex helpers */
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-2 {
+  gap: var(--space-2);
+}
+
+.gap-3 {
+  gap: var(--space-3);
+}
+
+.gap-4 {
+  gap: var(--space-4);
+}
+
+/* Espaçamentos utilitários */
+
+.mt-2 {
+  margin-top: var(--space-2);
+}
+
+.mt-3 {
+  margin-top: var(--space-3);
+}
+
+.mt-4 {
+  margin-top: var(--space-4);
+}
+
+.mb-2 {
+  margin-bottom: var(--space-2);
+}
+
+.mb-3 {
+  margin-bottom: var(--space-3);
+}
+
+.mb-4 {
+  margin-bottom: var(--space-4);
+}
+
+/* Containers */
+
+.container {
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  padding-inline: var(--space-page-x);
+}
+
+.container-wide {
+  max-width: var(--container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--space-page-x);
+}
+
+/* Cards de seção (ex: blocos de categoria, banners menores) */
+
+.surface {
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--space-4);
+}
+
+.surface-soft {
+  background: var(--color-bg-surface-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: var(--space-4);
+}
+
+/* Sombras adicionais */
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-strong {
+  box-shadow: var(--shadow-strong);
+}
+
+/* Chips / tags genéricas */
+
+.chip-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--color-bg-chip);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Badges de status (ex: pedido, estoque, etc.) */
+
+.badge-status {
+  padding: 0.18rem 0.7rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.badge-status--success {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+.badge-status--warning {
+  background: var(--color-warning-soft);
+  color: var(--color-on-warning);
+}
+
+.badge-status--danger {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+.badge-status--info {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}
+
+/* Estados de carregamento / vazio */
+
+.empty-state {
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.empty-state__icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-3);
+}
+
+.loading-spinner-center {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Visually hidden (a11y) */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Banner principal (hero home) - container de fundo */
+
+.hero-banner-shell {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6) var(--space-6);
+  background:
+    radial-gradient(circle at top left, rgba(0, 0, 255, 0.32), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(250, 0, 63, 0.3), transparent 55%),
+    var(--color-bg-surface-strong);
+  box-shadow: var(--shadow-elevated);
+  overflow: hidden;
+}
+
+/* Badge de “Ofertas do dia” / “Relâmpago” */
+
+.flash-deal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary),
+    var(--color-accent)
+  );
+  color: var(--color-on-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Ajustes responsivos */
+
+@media (max-width: 640px) {
+  .section-header {
+    align-items: flex-start;
+  }
+
+  .hero-banner-shell {
+    padding: var(--space-5) var(--space-4);
+    border-radius: var(--radius-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: var(--space-section-y);
+  }
+
+  .hero-banner-shell {
+    padding: var(--space-8) var(--space-8);
+  }
+}
