@@ -13,6 +13,8 @@ import styles from '../styles/SecurityPage.module.css';
 export default function SecurityPage() {
   const { user, changePassword } = useAuth();
 
+  const canChangePassword = user?.provider === 'password';
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -74,12 +76,20 @@ export default function SecurityPage() {
               </p>
             </div>
 
-            <ChangePasswordForm
-              isSubmitting={isSubmitting}
-              serverError={serverError}
-              successMessage={successMessage}
-              onSubmit={handleSubmit}
-            />
+            {canChangePassword ? (
+              <ChangePasswordForm
+                isSubmitting={isSubmitting}
+                serverError={serverError}
+                successMessage={successMessage}
+                onSubmit={handleSubmit}
+              />
+            ) : (
+              <div className="form-alert">
+                Esta conta usa {user?.provider ?? 'um provedor externo'}.
+                A senha deve ser gerenciada diretamente no provedor usado
+                para entrar.
+              </div>
+            )}
           </div>
 
           <aside className={styles.sideInfo}>

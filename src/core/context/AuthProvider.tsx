@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import {
   useCallback,
@@ -8,12 +8,15 @@ import {
 } from 'react';
 import {
   createUserWithEmailAndPassword,
+  EmailAuthProvider,
   FacebookAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  reauthenticateWithCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updatePassword,
   updateProfile,
 } from 'firebase/auth';
 
@@ -167,10 +170,85 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const changePassword = useCallback(
-    async (_data: PasswordFormData) => {
-      throw new Error(
-        'Alteração de senha será habilitada na próxima etapa de autenticação.',
+    async ({
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    }: PasswordFormData) => {
+      if (newPassword !== confirmPassword) {
+        throw new Error('A confirmação da nova senha não coincide.');
+      }
+
+      const auth = getFirebaseAuth();
+      const firebaseUser = auth.currentUser;
+
+      if (!firebaseUser) {
+        throw new Error(
+          'Sua sessão expirou. Entre novamente antes de alterar a senha.',
+        );
+      }
+
+      const hasPasswordProvider = firebaseUser.providerData.some(
+        ({ providerId }) => providerId === 'password',
       );
+
+      if (!hasPasswordProvider || !firebaseUser.email) {
+        throw new Error(
+          'Esta conta usa um provedor externo. Gerencie a senha no provedor de login.',
+        );
+      }
+
+      const credential = EmailAuthProvider.credential(
+        firebaseUser.email,
+        currentPassword,
+      );
+
+      try {
+        await reauthenticateWithCredential(
+          firebaseUser,
+          credential,
+        );
+
+        await updatePassword(
+          firebaseUser,
+          newPassword,
+        );
+      } catch (error: unknown) {
+        const code =
+          typeof error === 'object' &&
+          error !== null &&
+          'code' in error &&
+          typeof error.code === 'string'
+            ? error.code
+            : null;
+
+        if (
+          code === 'auth/invalid-credential' ||
+          code === 'auth/wrong-password'
+        ) {
+          throw new Error('A senha atual está incorreta.');
+        }
+
+        if (code === 'auth/weak-password') {
+          throw new Error(
+            'A nova senha não atende aos requisitos de segurança.',
+          );
+        }
+
+        if (code === 'auth/too-many-requests') {
+          throw new Error(
+            'Muitas tentativas foram realizadas. Aguarde alguns minutos e tente novamente.',
+          );
+        }
+
+        if (code === 'auth/requires-recent-login') {
+          throw new Error(
+            'Por segurança, entre novamente na conta antes de alterar a senha.',
+          );
+        }
+
+        throw error;
+      }
     },
     [],
   );
