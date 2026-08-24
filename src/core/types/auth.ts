@@ -53,6 +53,7 @@ export interface AuthContextType {
   loginWithAuth0: () => Promise<void>;
 
   logout: () => Promise<void>;
+  reconcileInvalidSession: () => Promise<void>;
 
   profile: UserData | null;
   isLoadingProfile: boolean;

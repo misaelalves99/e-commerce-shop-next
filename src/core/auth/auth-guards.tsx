@@ -1,9 +1,10 @@
-﻿'use client';
+'use client';
 
 import { useEffect, type ReactNode } from 'react';
 import {
   usePathname,
   useRouter,
+  useSearchParams,
 } from 'next/navigation';
 
 import { resolveAppRoute, type AppRoute } from '../config/routes';
@@ -75,10 +76,22 @@ export function RequireGuest({
   redirectTo = '/',
 }: RequireGuestProps) {
   const router = useRouter();
-  const { loading, isAuthenticated } = useAuth();
+  const searchParams = useSearchParams();
+  const {
+    loading,
+    isAuthenticated,
+    reconcileInvalidSession,
+  } = useAuth();
+
+  const sessionInvalid =
+    searchParams.get('sessionInvalid') === '1';
 
   useEffect(() => {
-    if (loading || !isAuthenticated) {
+    if (
+      loading ||
+      !isAuthenticated ||
+      sessionInvalid
+    ) {
       return;
     }
 
@@ -88,6 +101,22 @@ export function RequireGuest({
     loading,
     redirectTo,
     router,
+    sessionInvalid,
+  ]);
+
+  useEffect(() => {
+    if (
+      loading ||
+      !sessionInvalid
+    ) {
+      return;
+    }
+
+    void reconcileInvalidSession();
+  }, [
+    loading,
+    reconcileInvalidSession,
+    sessionInvalid,
   ]);
 
   if (loading) {

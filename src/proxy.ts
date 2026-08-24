@@ -50,6 +50,13 @@ export async function proxy(request: NextRequest) {
       `${pathname}${search}`,
     );
 
+    if (sessionCookie) {
+      loginUrl.searchParams.set(
+        'sessionInvalid',
+        '1',
+      );
+    }
+
     const response =
       NextResponse.redirect(loginUrl);
 

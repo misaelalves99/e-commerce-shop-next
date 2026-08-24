@@ -265,6 +265,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setLoading(false);
     }
   }, []);
+  const reconcileInvalidSession = useCallback(
+    async () => {
+      await signOut(getFirebaseAuth());
+      setUser(null);
+    },
+    [],
+  );
 
   const value: AuthContextType = {
     user,
@@ -277,7 +284,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     loginWithFacebook,
     loginWithAuth0,
     logout,
-
+    reconcileInvalidSession,
     profile,
     isLoadingProfile: loading,
     updateUserProfile,
