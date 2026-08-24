@@ -24,9 +24,9 @@ import { mapFirebaseUserToAuthUser } from '../auth/firebase-auth';
 import { AuthContext } from './AuthContext';
 import { getFirebaseAuth } from '../lib/firebase/client';
 import {
-  clearAuthCookie,
-  setAuthCookie,
-} from '../lib/firebase/storage/auth-storage';
+  createServerSession,
+  deleteServerSession,
+} from '../auth/session-client';
 import type {
   AuthContextType,
   AuthUser,
@@ -54,17 +54,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
       (firebaseUser) => {
         if (firebaseUser) {
           setUser(mapFirebaseUserToAuthUser(firebaseUser));
-          setAuthCookie();
         } else {
           setUser(null);
-          clearAuthCookie();
         }
 
         setLoading(false);
       },
       () => {
         setUser(null);
-        clearAuthCookie();
         setLoading(false);
       },
     );
@@ -81,8 +78,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
           password,
         );
 
+        await createServerSession(credential.user);
+
         setUser(mapFirebaseUserToAuthUser(credential.user));
-        setAuthCookie();
       } finally {
         setLoading(false);
       }
@@ -114,8 +112,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const refreshedUser =
           getFirebaseAuth().currentUser ?? credential.user;
 
+        await createServerSession(refreshedUser);
+
         setUser(mapFirebaseUserToAuthUser(refreshedUser));
-        setAuthCookie();
       } finally {
         setLoading(false);
       }
@@ -132,8 +131,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         new GoogleAuthProvider(),
       );
 
+      await createServerSession(credential.user);
+
       setUser(mapFirebaseUserToAuthUser(credential.user));
-      setAuthCookie();
     } finally {
       setLoading(false);
     }
@@ -148,8 +148,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         new FacebookAuthProvider(),
       );
 
+      await createServerSession(credential.user);
+
       setUser(mapFirebaseUserToAuthUser(credential.user));
-      setAuthCookie();
     } finally {
       setLoading(false);
     }
@@ -257,9 +258,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setLoading(true);
 
     try {
+      await deleteServerSession();
       await signOut(getFirebaseAuth());
       setUser(null);
-      clearAuthCookie();
     } finally {
       setLoading(false);
     }
