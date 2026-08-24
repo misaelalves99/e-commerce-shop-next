@@ -1,82 +1,136 @@
-// src/core/auth/auth-guards.tsx
 'use client';
 
-import type { ReactNode } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useEffect, type ReactNode } from 'react';
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 
-import { useAuth } from '../hooks/useAuth';
 import { resolveAppRoute, type AppRoute } from '../config/routes';
-import { hasAuthCookie, setAuthCookie, clearAuthCookie } from '../lib/firebase/storage/auth-storage';
+import { useAuth } from '../hooks/useAuth';
 
-/**
- * Guard para páginas que exigem usuário autenticado.
- * Exemplo de uso:
- *
- * <RequireAuth>
- *   <ProfilePage />
- * </RequireAuth>
- */
 interface RequireAuthProps {
   children: ReactNode;
   redirectTo?: AppRoute;
 }
 
-export function RequireAuth({ children, redirectTo = '/login' }: RequireAuthProps) {
+export function RequireAuth({
+  children,
+  redirectTo = '/login',
+}: RequireAuthProps) {
   const router = useRouter();
   const pathname = usePathname();
   const { loading, isAuthenticated } = useAuth();
 
-  // sincroniza cookie com estado de auth (para o middleware)
-  if (!loading) {
-    if (isAuthenticated && !hasAuthCookie()) {
-      setAuthCookie();
+  useEffect(() => {
+    if (loading || isAuthenticated) {
+      return;
     }
-    if (!isAuthenticated && hasAuthCookie()) {
-      clearAuthCookie();
-    }
-  }
+
+    const search = pathname
+      ? `?redirectTo=${encodeURIComponent(pathname)}`
+      : '';
+
+    router.replace(
+      resolveAppRoute(
+        `${redirectTo}${search}`,
+        redirectTo,
+      ),
+    );
+  }, [
+    isAuthenticated,
+    loading,
+    pathname,
+    redirectTo,
+    router,
+  ]);
 
   if (loading) {
     return (
-      <div className="page-container" style={{ minHeight: '60vh' }}>
-        <p className="text-muted">Carregando sua sessão...</p>
+      <div
+        className="page-container"
+        style={{ minHeight: '60vh' }}
+      >
+        <p className="text-muted">
+          Carregando sua sessão...
+        </p>
       </div>
     );
   }
 
   if (!isAuthenticated) {
-    // Mantém um redirect para voltar depois do login
-    const search = pathname ? `?redirect=${encodeURIComponent(pathname)}` : '';
-    router.push(resolveAppRoute(`${redirectTo}${search}`, redirectTo));
     return null;
   }
 
   return <>{children}</>;
 }
 
-/**
- * Guard para páginas que só devem ser acessadas por convidados (não logados),
- * como /login e /register.
- */
 interface RequireGuestProps {
   children: ReactNode;
   redirectTo?: AppRoute;
 }
 
-export function RequireGuest({ children, redirectTo = '/' }: RequireGuestProps) {
+export function RequireGuest({
+  children,
+  redirectTo = '/',
+}: RequireGuestProps) {
   const router = useRouter();
-  const { loading, isAuthenticated } = useAuth();
+  const searchParams = useSearchParams();
+  const {
+    loading,
+    isAuthenticated,
+    reconcileInvalidSession,
+  } = useAuth();
+
+  const sessionInvalid =
+    searchParams.get('sessionInvalid') === '1';
+
+  useEffect(() => {
+    if (
+      loading ||
+      !isAuthenticated ||
+      sessionInvalid
+    ) {
+      return;
+    }
+
+    router.replace(redirectTo);
+  }, [
+    isAuthenticated,
+    loading,
+    redirectTo,
+    router,
+    sessionInvalid,
+  ]);
+
+  useEffect(() => {
+    if (
+      loading ||
+      !sessionInvalid
+    ) {
+      return;
+    }
+
+    void reconcileInvalidSession();
+  }, [
+    loading,
+    reconcileInvalidSession,
+    sessionInvalid,
+  ]);
 
   if (loading) {
     return (
-      <div className="page-container" style={{ minHeight: '60vh' }}>
+      <div
+        className="page-container"
+        style={{ minHeight: '60vh' }}
+      >
         <p className="text-muted">Carregando...</p>
       </div>
     );
   }
 
   if (isAuthenticated) {
-    router.replace(redirectTo);
     return null;
   }
 

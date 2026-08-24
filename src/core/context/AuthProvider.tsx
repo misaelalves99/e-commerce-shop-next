@@ -1,127 +1,139 @@
-// src/core/context/AuthProvider.tsx
 'use client';
 
 import {
-  useState,
-  useEffect,
   useCallback,
+  useEffect,
+  useState,
   type ReactNode,
 } from 'react';
+import {
+  createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  reauthenticateWithCredential,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updatePassword,
+  updateProfile,
+} from 'firebase/auth';
+
+import { mapFirebaseUserToAuthUser } from '../auth/firebase-auth';
 import { AuthContext } from './AuthContext';
+import { getFirebaseAuth } from '../lib/firebase/client';
+import {
+  createServerSession,
+  deleteServerSession,
+} from '../auth/session-client';
 import type {
-  AuthUser,
   AuthContextType,
+  AuthUser,
   RegisterWithEmailParams,
 } from '../types/auth';
-import type { UserData } from '../types/user-data';
 import type { AddressData } from '../types/address';
 import type { PasswordFormData } from '../types/password';
-
-/**
- * Helpers simples para persistir usuário no localStorage.
- * Depois você pode trocar para Firebase/Auth0 sem mudar a API do contexto.
- */
-const STORAGE_KEY = 'ecommerce_auth_user';
-
-function loadUserFromStorage(): AuthUser | null {
-  if (typeof window === 'undefined') return null;
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    return JSON.parse(raw) as AuthUser;
-  } catch {
-    return null;
-  }
-}
-
-function saveUserToStorage(user: AuthUser | null): void {
-  if (typeof window === 'undefined') return;
-  if (!user) {
-    window.localStorage.removeItem(STORAGE_KEY);
-    document.cookie = 'auth=; path=/; max-age=0';
-    return;
-  }
-
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-  // Cookie simples para o middleware proteger /account, /checkout, etc.
-  document.cookie = 'auth=true; path=/; max-age=60*60*24*7';
-}
+import type { UserData } from '../types/user-data';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-/**
- * Provider de autenticação.
- * Hoje usa localStorage como mock, mas a API já está pronta para Firebase/Auth0.
- */
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<UserData | null>(null);
   const [address, setAddress] = useState<AddressData | null>(null);
 
-  // Carrega usuário do storage na inicialização
   useEffect(() => {
-    const storedUser = loadUserFromStorage();
-    // localStorage is an external client-side source hydrated after SSR.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setUser(storedUser);
-    setLoading(false);
+    const auth = getFirebaseAuth();
+
+    return onAuthStateChanged(
+      auth,
+      (firebaseUser) => {
+        if (firebaseUser) {
+          setUser(mapFirebaseUserToAuthUser(firebaseUser));
+        } else {
+          setUser(null);
+        }
+
+        setLoading(false);
+      },
+      () => {
+        setUser(null);
+        setLoading(false);
+      },
+    );
   }, []);
 
-  const loginWithEmail = useCallback(async (email: string, _password: string) => {
-    setLoading(true);
-    try {
-      // Aqui você pluga Firebase Auth ou Auth0.
-      const mockUser: AuthUser = {
-        id: `local-${email}`,
-        name: email.split('@')[0] ?? 'Usuário',
-        email,
-        avatarUrl: undefined,
-        provider: 'password',
-      };
+  const loginWithEmail = useCallback(
+    async (email: string, password: string) => {
+      setLoading(true);
 
-      setUser(mockUser);
-      saveUserToStorage(mockUser);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+      try {
+        const credential = await signInWithEmailAndPassword(
+          getFirebaseAuth(),
+          email.trim(),
+          password,
+        );
 
-  const registerWithEmail = useCallback(async ({ name, email, password: _password }: RegisterWithEmailParams) => {
-    setLoading(true);
-    try {
-      // Registro mock. Em produção, use Firebase/Auth0 + backend.
-      const mockUser: AuthUser = {
-        id: `local-${email}`,
-        name,
-        email,
-        avatarUrl: undefined,
-        provider: 'password',
-      };
+        await createServerSession(credential.user);
 
-      setUser(mockUser);
-      saveUserToStorage(mockUser);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+        setUser(mapFirebaseUserToAuthUser(credential.user));
+      } finally {
+        setLoading(false);
+      }
+    },
+    [],
+  );
+
+  const registerWithEmail = useCallback(
+    async ({ name, email, password }: RegisterWithEmailParams) => {
+      setLoading(true);
+
+      try {
+        const credential = await createUserWithEmailAndPassword(
+          getFirebaseAuth(),
+          email.trim(),
+          password,
+        );
+
+        const normalizedName = name.trim();
+
+        if (normalizedName) {
+          await updateProfile(credential.user, {
+            displayName: normalizedName,
+          });
+        }
+
+        await credential.user.reload();
+
+        const refreshedUser =
+          getFirebaseAuth().currentUser ?? credential.user;
+
+        await createServerSession(refreshedUser);
+
+        setUser(mapFirebaseUserToAuthUser(refreshedUser));
+      } finally {
+        setLoading(false);
+      }
+    },
+    [],
+  );
 
   const loginWithGoogle = useCallback(async () => {
     setLoading(true);
-    try {
-      // TODO: integrar com Firebase/Auth0 Google Sign-In
-      const mockUser: AuthUser = {
-        id: 'google-mock',
-        name: 'Usuário Google',
-        email: 'user-google@example.com',
-        avatarUrl: undefined,
-        provider: 'google',
-      };
 
-      setUser(mockUser);
-      saveUserToStorage(mockUser);
+    try {
+      const credential = await signInWithPopup(
+        getFirebaseAuth(),
+        new GoogleAuthProvider(),
+      );
+
+      await createServerSession(credential.user);
+
+      setUser(mapFirebaseUserToAuthUser(credential.user));
     } finally {
       setLoading(false);
     }
@@ -129,39 +141,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const loginWithFacebook = useCallback(async () => {
     setLoading(true);
-    try {
-      // TODO: integrar com Firebase/Auth0 Facebook Login
-      const mockUser: AuthUser = {
-        id: 'facebook-mock',
-        name: 'Usuário Facebook',
-        email: 'user-facebook@example.com',
-        avatarUrl: undefined,
-        provider: 'facebook',
-      };
 
-      setUser(mockUser);
-      saveUserToStorage(mockUser);
+    try {
+      const credential = await signInWithPopup(
+        getFirebaseAuth(),
+        new FacebookAuthProvider(),
+      );
+
+      await createServerSession(credential.user);
+
+      setUser(mapFirebaseUserToAuthUser(credential.user));
     } finally {
       setLoading(false);
     }
   }, []);
 
   const loginWithAuth0 = useCallback(async () => {
-    setLoading(true);
-    try {
-      const mockUser: AuthUser = {
-        id: 'auth0-mock',
-        name: 'Usuário Auth0',
-        email: 'user-auth0@example.com',
-        avatarUrl: undefined,
-        provider: 'auth0',
-      };
-
-      setUser(mockUser);
-      saveUserToStorage(mockUser);
-    } finally {
-      setLoading(false);
-    }
+    throw new Error(
+      'Login com Auth0 ainda não está habilitado nesta etapa.',
+    );
   }, []);
 
   const updateUserProfile = useCallback(async (data: UserData) => {
@@ -172,31 +170,121 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setAddress(data);
   }, []);
 
-  const changePassword = useCallback(async (_data: PasswordFormData) => {
-    // Fluxo demonstrativo: nenhuma credencial real é persistida.
-    await Promise.resolve();
-  }, []);
+  const changePassword = useCallback(
+    async ({
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    }: PasswordFormData) => {
+      if (newPassword !== confirmPassword) {
+        throw new Error('A confirmação da nova senha não coincide.');
+      }
+
+      const auth = getFirebaseAuth();
+      const firebaseUser = auth.currentUser;
+
+      if (!firebaseUser) {
+        throw new Error(
+          'Sua sessão expirou. Entre novamente antes de alterar a senha.',
+        );
+      }
+
+      const hasPasswordProvider = firebaseUser.providerData.some(
+        ({ providerId }) => providerId === 'password',
+      );
+
+      if (!hasPasswordProvider || !firebaseUser.email) {
+        throw new Error(
+          'Esta conta usa um provedor externo. Gerencie a senha no provedor de login.',
+        );
+      }
+
+      const credential = EmailAuthProvider.credential(
+        firebaseUser.email,
+        currentPassword,
+      );
+
+      try {
+        await reauthenticateWithCredential(
+          firebaseUser,
+          credential,
+        );
+
+        await updatePassword(
+          firebaseUser,
+          newPassword,
+        );
+      } catch (error: unknown) {
+        const code =
+          typeof error === 'object' &&
+          error !== null &&
+          'code' in error &&
+          typeof error.code === 'string'
+            ? error.code
+            : null;
+
+        if (
+          code === 'auth/invalid-credential' ||
+          code === 'auth/wrong-password'
+        ) {
+          throw new Error('A senha atual está incorreta.');
+        }
+
+        if (code === 'auth/weak-password') {
+          throw new Error(
+            'A nova senha não atende aos requisitos de segurança.',
+          );
+        }
+
+        if (code === 'auth/too-many-requests') {
+          throw new Error(
+            'Muitas tentativas foram realizadas. Aguarde alguns minutos e tente novamente.',
+          );
+        }
+
+        if (code === 'auth/requires-recent-login') {
+          throw new Error(
+            'Por segurança, entre novamente na conta antes de alterar a senha.',
+          );
+        }
+
+        throw error;
+      }
+    },
+    [],
+  );
 
   const logout = useCallback(async () => {
     setLoading(true);
+
     try {
+      await deleteServerSession();
+      await signOut(getFirebaseAuth());
       setUser(null);
-      saveUserToStorage(null);
     } finally {
       setLoading(false);
     }
   }, []);
+  const reconcileInvalidSession = useCallback(
+    async () => {
+      await signOut(getFirebaseAuth());
+      setUser(null);
+    },
+    [],
+  );
 
   const value: AuthContextType = {
     user,
     loading,
-    isAuthenticated: !!user,
+    isAuthenticated: Boolean(user),
+
     loginWithEmail,
     registerWithEmail,
     loginWithGoogle,
     loginWithFacebook,
     loginWithAuth0,
-
+    logout,
+    reconcileInvalidSession,
     profile,
     isLoadingProfile: loading,
     updateUserProfile,
@@ -205,8 +293,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     updateAddress,
 
     changePassword,
-    logout,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 }

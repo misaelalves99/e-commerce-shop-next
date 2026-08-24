@@ -1,0 +1,7 @@
+export const AUTH_SESSION_COOKIE_NAME = 'auth_session';
+
+export const AUTH_SESSION_MAX_AGE_SECONDS =
+  60 * 60 * 24 * 5;
+
+export const AUTH_SESSION_MAX_AGE_MILLISECONDS =
+  AUTH_SESSION_MAX_AGE_SECONDS * 1000;

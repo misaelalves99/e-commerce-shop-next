@@ -182,8 +182,8 @@ export default function ChangePasswordForm({
 
       <div className="form-footer">
         <p className="form-hint">
-          Ao alterar sua senha, sessões antigas podem ser
-          desconectadas por segurança (comportamento simulado).
+          Para sua segurança, confirmamos sua senha atual antes
+          de salvar a nova credencial.
         </p>
         <div className="form-actions">
           <button
