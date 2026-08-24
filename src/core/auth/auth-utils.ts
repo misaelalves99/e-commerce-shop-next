@@ -6,32 +6,11 @@ import type { AuthUser } from '../types/auth';
  * Você pode substituir por `import type { User as FirebaseUser } from 'firebase/auth'`
  * e tipos do Auth0 quando integrar de fato.
  */
-interface FirebaseUserLike {
-  uid: string;
-  displayName: string | null;
-  email: string | null;
-  photoURL: string | null;
-  providerId?: string;
-}
-
 interface Auth0UserLike {
   sub?: string;
   name?: string;
   email?: string;
   picture?: string;
-}
-
-/**
- * Mapeia um usuário do Firebase para o tipo AuthUser usado na aplicação.
- */
-export function mapFirebaseUserToAuthUser(user: FirebaseUserLike): AuthUser {
-  return {
-    id: user.uid,
-    name: user.displayName ?? user.email ?? 'Usuário',
-    email: user.email ?? '',
-    avatarUrl: user.photoURL ?? undefined,
-    provider: 'firebase',
-  };
 }
 
 /**

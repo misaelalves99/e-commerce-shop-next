@@ -1,4 +1,4 @@
-// src/core/lib/storage/auth-storage.ts
+// src/core/lib/firebase/storage/auth-storage.ts
 /**
  * Utilitários para lidar com autenticação em storage/cookies.
  * O objetivo é ter um ponto único para leitura/escrita do cookie "auth"
