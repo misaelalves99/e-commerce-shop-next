@@ -64,6 +64,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // Carrega usuário do storage na inicialização
   useEffect(() => {
     const storedUser = loadUserFromStorage();
+    // localStorage is an external client-side source hydrated after SSR.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setUser(storedUser);
     setLoading(false);
   }, []);

@@ -1,7 +1,7 @@
 // src/features/account/components/ProfileForm.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { FormEvent } from 'react';
 
 import type { UserData } from '@/core/types/user-data';
@@ -27,12 +27,6 @@ export default function ProfileForm({
 }: ProfileFormProps) {
   const [formValues, setFormValues] = useState<UserData | null>(initialValues);
   const [errors, setErrors] = useState<ProfileErrors>({});
-
-  useEffect(() => {
-    if (initialValues) {
-      setFormValues(initialValues);
-    }
-  }, [initialValues]);
 
   const handleChange = (
     field: keyof UserData,

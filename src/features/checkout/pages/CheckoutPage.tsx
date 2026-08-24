@@ -9,7 +9,6 @@ import Link from 'next/link';
 
 import { useCart } from '@/core/hooks/useCart';
 import { ROUTES } from '@/core/config/routes';
-import type { CartItem } from '@/core/types/cart';
 import type { AddressData } from '@/core/types/address';
 
 import CartSummary from '@/features/cart/components/CartSummary';

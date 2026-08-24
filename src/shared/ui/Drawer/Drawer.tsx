@@ -1,6 +1,6 @@
 // src/shared/ui/Drawer/Drawer.tsx
 
-import type { ReactNode, MouseEvent, KeyboardEvent } from 'react';
+import type { ReactNode, MouseEvent } from 'react';
 import { useEffect } from 'react';
 import styles from './Drawer.module.css';
 
@@ -26,14 +26,14 @@ export function Drawer({
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleKeyDown = (event: KeyboardEvent | KeyboardEventInit | any) => {
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown as any);
-    return () => window.removeEventListener('keydown', handleKeyDown as any);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;

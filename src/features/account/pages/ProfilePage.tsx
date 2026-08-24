@@ -1,7 +1,7 @@
 // src/features/account/pages/ProfilePage.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
 import { useAuth } from '@/core/hooks/useAuth';
@@ -13,27 +13,22 @@ import styles from '../styles/ProfilePage.module.css';
 export default function ProfilePage() {
   const { user, profile, isLoadingProfile, updateUserProfile } = useAuth();
 
-  const [initialValues, setInitialValues] = useState<UserData | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!profile && user) {
-      // fallback mínimo usando AuthUser
-      setInitialValues({
-        fullName: user.name ?? '',
-        cpf: '',
-        birthDate: '',
-        gender: '',
-        phone: '',
-        email: user.email,
-      });
-    } else if (profile) {
-      setInitialValues(profile);
-    }
-  }, [profile, user]);
-
+  const initialValues: UserData | null =
+    profile ??
+    (user
+      ? {
+          fullName: user.name ?? '',
+          cpf: '',
+          birthDate: '',
+          gender: '',
+          phone: '',
+          email: user.email,
+        }
+      : null);
   const handleSubmit = async (values: UserData) => {
     setServerError(null);
     setSuccessMessage(null);
@@ -93,6 +88,7 @@ export default function ProfilePage() {
             </div>
 
             <ProfileForm
+              key={JSON.stringify(initialValues)}
               initialValues={initialValues}
               loading={isLoadingProfile || !initialValues}
               isSubmitting={isSubmitting}
