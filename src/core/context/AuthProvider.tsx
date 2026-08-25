@@ -32,6 +32,11 @@ import type {
   AuthUser,
   RegisterWithEmailParams,
 } from '../types/auth';
+import {
+  loadAccountData,
+  persistAddress,
+  persistUserProfile,
+} from '../data/account/account-client';
 import type { AddressData } from '../types/address';
 import type { PasswordFormData } from '../types/password';
 import type { UserData } from '../types/user-data';
@@ -46,6 +51,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [profile, setProfile] = useState<UserData | null>(null);
   const [address, setAddress] = useState<AddressData | null>(null);
 
+  const hydrateAccountData = useCallback(async () => {
+    const account = await loadAccountData();
+
+    setProfile(account.profile);
+    setAddress(account.address);
+  }, []);
+
   useEffect(() => {
     const auth = getFirebaseAuth();
 
@@ -54,18 +66,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
       (firebaseUser) => {
         if (firebaseUser) {
           setUser(mapFirebaseUserToAuthUser(firebaseUser));
+
+          void hydrateAccountData().catch(() => {
+            setProfile(null);
+            setAddress(null);
+          });
         } else {
           setUser(null);
+          setProfile(null);
+          setAddress(null);
         }
 
         setLoading(false);
       },
       () => {
         setUser(null);
+        setProfile(null);
+        setAddress(null);
         setLoading(false);
       },
     );
-  }, []);
+  }, [hydrateAccountData]);
 
   const loginWithEmail = useCallback(
     async (email: string, password: string) => {
@@ -81,11 +102,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
         await createServerSession(credential.user);
 
         setUser(mapFirebaseUserToAuthUser(credential.user));
+        await hydrateAccountData();
       } finally {
         setLoading(false);
       }
     },
-    [],
+    [hydrateAccountData],
   );
 
   const registerWithEmail = useCallback(
@@ -115,11 +137,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
         await createServerSession(refreshedUser);
 
         setUser(mapFirebaseUserToAuthUser(refreshedUser));
+        await hydrateAccountData();
       } finally {
         setLoading(false);
       }
     },
-    [],
+    [hydrateAccountData],
   );
 
   const loginWithGoogle = useCallback(async () => {
@@ -134,10 +157,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await createServerSession(credential.user);
 
       setUser(mapFirebaseUserToAuthUser(credential.user));
+      await hydrateAccountData();
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [hydrateAccountData]);
 
   const loginWithFacebook = useCallback(async () => {
     setLoading(true);
@@ -151,10 +175,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await createServerSession(credential.user);
 
       setUser(mapFirebaseUserToAuthUser(credential.user));
+      await hydrateAccountData();
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [hydrateAccountData]);
 
   const loginWithAuth0 = useCallback(async () => {
     throw new Error(
@@ -163,11 +188,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const updateUserProfile = useCallback(async (data: UserData) => {
-    setProfile(data);
+    const persistedProfile = await persistUserProfile(data);
+    setProfile(persistedProfile);
   }, []);
 
   const updateAddress = useCallback(async (data: AddressData) => {
-    setAddress(data);
+    const persistedAddress = await persistAddress(data);
+    setAddress(persistedAddress);
   }, []);
 
   const changePassword = useCallback(
@@ -261,6 +288,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await deleteServerSession();
       await signOut(getFirebaseAuth());
       setUser(null);
+      setProfile(null);
+      setAddress(null);
     } finally {
       setLoading(false);
     }
@@ -269,6 +298,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     async () => {
       await signOut(getFirebaseAuth());
       setUser(null);
+      setProfile(null);
+      setAddress(null);
     },
     [],
   );
