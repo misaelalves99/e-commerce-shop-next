@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 import {
@@ -5,7 +6,12 @@ import {
   AUTH_SESSION_MAX_AGE_MILLISECONDS,
   AUTH_SESSION_MAX_AGE_SECONDS,
 } from '@/core/auth/session';
-import { getFirebaseAdminAuth } from '@/core/lib/firebase/admin/firebase-admin';
+import {
+  verifyServerSession,
+} from '@/core/auth/session-server';
+import {
+  getFirebaseAdminAuth,
+} from '@/core/lib/firebase/admin/firebase-admin';
 
 interface CreateSessionBody {
   idToken?: unknown;
@@ -16,22 +22,59 @@ const MAX_SIGN_IN_AGE_SECONDS = 5 * 60;
 function sessionCookieOptions() {
   return {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure:
+      process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
     path: '/',
-    maxAge: AUTH_SESSION_MAX_AGE_SECONDS,
+    maxAge:
+      AUTH_SESSION_MAX_AGE_SECONDS,
   };
 }
 
-export async function POST(request: Request) {
+export async function GET() {
+  const cookieStore = await cookies();
+
+  const session =
+    await verifyServerSession(
+      cookieStore.get(
+        AUTH_SESSION_COOKIE_NAME,
+      )?.value,
+    );
+
+  if (!session) {
+    return NextResponse.json(
+      {
+        authenticated: false,
+      },
+      {
+        status: 401,
+      },
+    );
+  }
+
+  return NextResponse.json({
+    authenticated: true,
+    uid: session.uid,
+  });
+}
+
+export async function POST(
+  request: Request,
+) {
   let body: CreateSessionBody;
 
   try {
-    body = (await request.json()) as CreateSessionBody;
+    body =
+      (await request.json()) as CreateSessionBody;
   } catch {
     return NextResponse.json(
-      { error: 'Invalid request body.' },
-      { status: 400 },
+      {
+        error:
+          'Invalid request body.',
+      },
+      {
+        status: 400,
+      },
     );
   }
 
@@ -40,23 +83,32 @@ export async function POST(request: Request) {
     body.idToken.length === 0
   ) {
     return NextResponse.json(
-      { error: 'Firebase ID token is required.' },
-      { status: 400 },
+      {
+        error:
+          'Firebase ID token is required.',
+      },
+      {
+        status: 400,
+      },
     );
   }
 
-  const adminAuth = getFirebaseAdminAuth();
+  const adminAuth =
+    getFirebaseAdminAuth();
 
   try {
-    const decodedToken = await adminAuth.verifyIdToken(
-      body.idToken,
-      true,
-    );
+    const decodedToken =
+      await adminAuth.verifyIdToken(
+        body.idToken,
+        true,
+      );
 
-    const nowSeconds = Math.floor(Date.now() / 1000);
+    const nowSeconds =
+      Math.floor(Date.now() / 1000);
 
     if (
-      nowSeconds - decodedToken.auth_time >
+      nowSeconds -
+        decodedToken.auth_time >
       MAX_SIGN_IN_AGE_SECONDS
     ) {
       return NextResponse.json(
@@ -64,7 +116,9 @@ export async function POST(request: Request) {
           error:
             'Recent authentication is required to create a server session.',
         },
-        { status: 401 },
+        {
+          status: 401,
+        },
       );
     }
 
@@ -77,9 +131,11 @@ export async function POST(request: Request) {
         },
       );
 
-    const response = NextResponse.json({
-      authenticated: true,
-    });
+    const response =
+      NextResponse.json({
+        authenticated: true,
+        uid: decodedToken.uid,
+      });
 
     response.cookies.set(
       AUTH_SESSION_COOKIE_NAME,
@@ -90,16 +146,22 @@ export async function POST(request: Request) {
     return response;
   } catch {
     return NextResponse.json(
-      { error: 'Invalid Firebase authentication token.' },
-      { status: 401 },
+      {
+        error:
+          'Invalid Firebase authentication token.',
+      },
+      {
+        status: 401,
+      },
     );
   }
 }
 
 export async function DELETE() {
-  const response = NextResponse.json({
-    authenticated: false,
-  });
+  const response =
+    NextResponse.json({
+      authenticated: false,
+    });
 
   response.cookies.set(
     AUTH_SESSION_COOKIE_NAME,

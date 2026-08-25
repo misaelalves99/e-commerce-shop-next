@@ -25,6 +25,7 @@ import { AuthContext } from './AuthContext';
 import { getFirebaseAuth } from '../lib/firebase/client';
 import {
   createServerSession,
+  ensureServerSession,
   deleteServerSession,
 } from '../auth/session-client';
 import type {
@@ -48,6 +49,8 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [serverSessionReady, setServerSessionReady] =
+    useState(false);
   const [profile, setProfile] = useState<UserData | null>(null);
   const [address, setAddress] = useState<AddressData | null>(null);
 
@@ -65,22 +68,40 @@ export function AuthProvider({ children }: AuthProviderProps) {
       auth,
       (firebaseUser) => {
         if (firebaseUser) {
-          setUser(mapFirebaseUserToAuthUser(firebaseUser));
+          setServerSessionReady(false);
 
-          void hydrateAccountData().catch(() => {
-            setProfile(null);
-            setAddress(null);
-          });
-        } else {
-          setUser(null);
-          setProfile(null);
-          setAddress(null);
+          void (async () => {
+            try {
+              await ensureServerSession(firebaseUser);
+
+              setUser(
+                mapFirebaseUserToAuthUser(firebaseUser),
+              );
+              setServerSessionReady(true);
+
+              await hydrateAccountData();
+            } catch {
+              setUser(null);
+              setServerSessionReady(false);
+              setProfile(null);
+              setAddress(null);
+            } finally {
+              setLoading(false);
+            }
+          })();
+
+          return;
         }
 
+        setUser(null);
+        setServerSessionReady(false);
+        setProfile(null);
+        setAddress(null);
         setLoading(false);
       },
       () => {
         setUser(null);
+        setServerSessionReady(false);
         setProfile(null);
         setAddress(null);
         setLoading(false);
@@ -100,6 +121,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         );
 
         await createServerSession(credential.user);
+        setServerSessionReady(true);
 
         setUser(mapFirebaseUserToAuthUser(credential.user));
         await hydrateAccountData();
@@ -135,6 +157,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           getFirebaseAuth().currentUser ?? credential.user;
 
         await createServerSession(refreshedUser);
+        setServerSessionReady(true);
 
         setUser(mapFirebaseUserToAuthUser(refreshedUser));
         await hydrateAccountData();
@@ -155,6 +178,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       );
 
       await createServerSession(credential.user);
+      setServerSessionReady(true);
 
       setUser(mapFirebaseUserToAuthUser(credential.user));
       await hydrateAccountData();
@@ -173,6 +197,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       );
 
       await createServerSession(credential.user);
+      setServerSessionReady(true);
 
       setUser(mapFirebaseUserToAuthUser(credential.user));
       await hydrateAccountData();
@@ -286,6 +311,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     try {
       await deleteServerSession();
+      setServerSessionReady(false);
       await signOut(getFirebaseAuth());
       setUser(null);
       setProfile(null);
@@ -297,6 +323,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const reconcileInvalidSession = useCallback(
     async () => {
       await signOut(getFirebaseAuth());
+      setServerSessionReady(false);
       setUser(null);
       setProfile(null);
       setAddress(null);
@@ -308,6 +335,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     user,
     loading,
     isAuthenticated: Boolean(user),
+    serverSessionReady,
 
     loginWithEmail,
     registerWithEmail,
