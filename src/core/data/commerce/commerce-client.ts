@@ -1,5 +1,9 @@
 import type { CartItem } from '@/core/types/cart';
 
+import {
+  createSerializedWriter,
+} from './serialized-writer';
+
 export interface CommerceData {
   cart: CartItem[];
   favoriteIds: string[];
@@ -52,7 +56,7 @@ export async function loadCommerceData(): Promise<CommerceData> {
   };
 }
 
-export async function persistCart(
+async function persistCartRequest(
   cart: CartItem[],
 ): Promise<CartItem[]> {
   const response =
@@ -72,7 +76,7 @@ export async function persistCart(
   return response.cart;
 }
 
-export async function persistFavoriteIds(
+async function persistFavoriteIdsRequest(
   favoriteIds: string[],
 ): Promise<string[]> {
   const response =
@@ -90,4 +94,28 @@ export async function persistFavoriteIds(
   }
 
   return response.favoriteIds;
+}
+
+const cartWriter =
+  createSerializedWriter<CartItem[]>(
+    persistCartRequest,
+  );
+
+const favoritesWriter =
+  createSerializedWriter<string[]>(
+    persistFavoriteIdsRequest,
+  );
+
+export function persistCart(
+  cart: CartItem[],
+): Promise<CartItem[]> {
+  return cartWriter.write(cart);
+}
+
+export function persistFavoriteIds(
+  favoriteIds: string[],
+): Promise<string[]> {
+  return favoritesWriter.write(
+    favoriteIds,
+  );
 }

@@ -6,35 +6,43 @@ import {
 } from '@/core/auth/session';
 import { verifyServerSession } from '@/core/auth/session-server';
 import {
+  normalizeAddress,
+  normalizeUserProfile,
+} from '@/core/data/account/account-normalize';
+import {
   getAccountData,
   saveAddress,
   saveUserProfile,
 } from '@/core/data/account/account-repository';
-import type { AddressData } from '@/core/types/address';
-import type { UserData } from '@/core/types/user-data';
 
 interface UpdateAccountBody {
-  profile?: UserData;
-  address?: AddressData;
+  profile?: unknown;
+  address?: unknown;
 }
 
 async function authenticatedUid(): Promise<string | null> {
-  const cookieStore = await cookies();
+  const cookieStore =
+    await cookies();
 
-  const session = await verifyServerSession(
-    cookieStore.get(AUTH_SESSION_COOKIE_NAME)?.value,
-  );
+  const session =
+    await verifyServerSession(
+      cookieStore.get(
+        AUTH_SESSION_COOKIE_NAME,
+      )?.value,
+    );
 
   return session?.uid ?? null;
 }
 
 export async function GET() {
-  const uid = await authenticatedUid();
+  const uid =
+    await authenticatedUid();
 
   if (!uid) {
     return NextResponse.json(
       {
-        error: 'Authentication required.',
+        error:
+          'Authentication required.',
       },
       {
         status: 401,
@@ -42,18 +50,25 @@ export async function GET() {
     );
   }
 
-  const account = await getAccountData(uid);
+  const account =
+    await getAccountData(uid);
 
-  return NextResponse.json(account);
+  return NextResponse.json(
+    account,
+  );
 }
 
-export async function PATCH(request: Request) {
-  const uid = await authenticatedUid();
+export async function PATCH(
+  request: Request,
+) {
+  const uid =
+    await authenticatedUid();
 
   if (!uid) {
     return NextResponse.json(
       {
-        error: 'Authentication required.',
+        error:
+          'Authentication required.',
       },
       {
         status: 401,
@@ -64,11 +79,14 @@ export async function PATCH(request: Request) {
   let body: UpdateAccountBody;
 
   try {
-    body = (await request.json()) as UpdateAccountBody;
+    body =
+      (await request.json()) as
+        UpdateAccountBody;
   } catch {
     return NextResponse.json(
       {
-        error: 'Invalid request body.',
+        error:
+          'Invalid request body.',
       },
       {
         status: 400,
@@ -76,31 +94,68 @@ export async function PATCH(request: Request) {
     );
   }
 
-  if (body.profile) {
-    const profile = await saveUserProfile(
-      uid,
-      body.profile,
-    );
+  if (body.profile !== undefined) {
+    const profile =
+      normalizeUserProfile(
+        body.profile,
+      );
+
+    if (!profile) {
+      return NextResponse.json(
+        {
+          error:
+            'Invalid profile data.',
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
+    const savedProfile =
+      await saveUserProfile(
+        uid,
+        profile,
+      );
 
     return NextResponse.json({
-      profile,
+      profile: savedProfile,
     });
   }
 
-  if (body.address) {
-    const address = await saveAddress(
-      uid,
-      body.address,
-    );
+  if (body.address !== undefined) {
+    const address =
+      normalizeAddress(
+        body.address,
+      );
+
+    if (!address) {
+      return NextResponse.json(
+        {
+          error:
+            'Invalid address data.',
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
+    const savedAddress =
+      await saveAddress(
+        uid,
+        address,
+      );
 
     return NextResponse.json({
-      address,
+      address: savedAddress,
     });
   }
 
   return NextResponse.json(
     {
-      error: 'Profile or address data is required.',
+      error:
+        'Profile or address data is required.',
     },
     {
       status: 400,
