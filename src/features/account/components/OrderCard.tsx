@@ -1,31 +1,25 @@
 // src/features/account/components/OrderCard.tsx
 'use client';
 
-import { FaArrowRight, FaBox, FaCreditCard } from 'react-icons/fa';
+import {
+  FaArrowRight,
+  FaBox,
+  FaCreditCard,
+} from 'react-icons/fa';
 
-export type OrderStatus =
-  | 'pending'
-  | 'processing'
-  | 'shipped'
-  | 'delivered'
-  | 'cancelled';
-
-export interface OrderSummary {
-  id: string;
-  number: string;
-  createdAt: string; // ISO ou string simples
-  status: OrderStatus;
-  total: number;
-  itemsCount: number;
-  paymentMethod: 'pix' | 'card' | 'boleto';
-  deliveryForecast?: string;
-}
+import type {
+  Order,
+  OrderPaymentMethod,
+  OrderStatus,
+} from '@/core/types/order';
 
 interface OrderCardProps {
-  order: OrderSummary;
+  order: Order;
 }
 
-function getStatusLabel(status: OrderStatus): string {
+function getStatusLabel(
+  status: OrderStatus,
+): string {
   switch (status) {
     case 'pending':
       return 'Pagamento pendente';
@@ -37,12 +31,12 @@ function getStatusLabel(status: OrderStatus): string {
       return 'Entregue';
     case 'cancelled':
       return 'Cancelado';
-    default:
-      return status;
   }
 }
 
-function getStatusClass(status: OrderStatus): string {
+function getStatusClass(
+  status: OrderStatus,
+): string {
   switch (status) {
     case 'pending':
       return 'status-badge status-badge--warning';
@@ -54,55 +48,86 @@ function getStatusClass(status: OrderStatus): string {
       return 'status-badge status-badge--success';
     case 'cancelled':
       return 'status-badge status-badge--danger';
-    default:
-      return 'status-badge';
   }
 }
 
 function getPaymentLabel(
-  method: OrderSummary['paymentMethod'],
+  method: OrderPaymentMethod,
 ): string {
   switch (method) {
     case 'pix':
       return 'PIX';
-    case 'card':
+    case 'credit-card':
       return 'Cartão de crédito';
     case 'boleto':
       return 'Boleto bancário';
-    default:
-      return method;
   }
 }
 
-function formatCurrency(value: number): string {
-  return value.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
+function formatCurrency(
+  value: number,
+): string {
+  return value.toLocaleString(
+    'pt-BR',
+    {
+      style: 'currency',
+      currency: 'BRL',
+    },
+  );
 }
 
-export default function OrderCard({ order }: OrderCardProps) {
+function formatOrderDate(
+  value: string,
+): string {
+  const date = new Date(value);
+
+  if (
+    Number.isNaN(
+      date.getTime(),
+    )
+  ) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat(
+    'pt-BR',
+    {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    },
+  ).format(date);
+}
+
+export default function OrderCard({
+  order,
+}: OrderCardProps) {
   return (
     <article className="order-card">
       <header className="order-card__header">
         <div className="order-card__title-group">
           <span className="order-card__icon">
-            <FaBox />
+            <FaBox aria-hidden="true" />
           </span>
+
           <div>
             <h3 className="order-card__title">
               Pedido #{order.number}
             </h3>
+
             <p className="order-card__meta">
               Realizado em{' '}
               <time dateTime={order.createdAt}>
-                {order.createdAt}
+                {formatOrderDate(order.createdAt)}
               </time>
             </p>
           </div>
         </div>
 
-        <span className={getStatusClass(order.status)}>
+        <span
+          className={
+            getStatusClass(order.status)
+          }
+        >
           {getStatusLabel(order.status)}
         </span>
       </header>
@@ -112,6 +137,7 @@ export default function OrderCard({ order }: OrderCardProps) {
           <span className="order-card__label">
             Itens
           </span>
+
           <span className="order-card__value">
             {order.itemsCount} item
             {order.itemsCount !== 1 ? 's' : ''}
@@ -122,25 +148,18 @@ export default function OrderCard({ order }: OrderCardProps) {
           <span className="order-card__label">
             Pagamento
           </span>
+
           <span className="order-card__value order-card__value--payment">
             <FaCreditCard
               className="order-card__value-icon"
               aria-hidden="true"
             />
-            {getPaymentLabel(order.paymentMethod)}
+
+            {getPaymentLabel(
+              order.paymentMethod,
+            )}
           </span>
         </div>
-
-        {order.deliveryForecast && (
-          <div className="order-card__row">
-            <span className="order-card__label">
-              Previsão de entrega
-            </span>
-            <span className="order-card__value">
-              {order.deliveryForecast}
-            </span>
-          </div>
-        )}
       </div>
 
       <footer className="order-card__footer">
@@ -148,6 +167,7 @@ export default function OrderCard({ order }: OrderCardProps) {
           <span className="order-card__total-label">
             Total
           </span>
+
           <span className="order-card__total-value">
             {formatCurrency(order.total)}
           </span>
@@ -156,6 +176,8 @@ export default function OrderCard({ order }: OrderCardProps) {
         <button
           type="button"
           className="btn-secondary btn-secondary--ghost"
+          disabled
+          title="Detalhes do pedido serão disponibilizados em uma etapa futura."
         >
           Ver detalhes
           <FaArrowRight
