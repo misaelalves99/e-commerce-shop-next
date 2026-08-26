@@ -2,13 +2,14 @@
 'use client';
 
 import { useState } from 'react';
+import type { OrderPaymentMethod } from '@/core/types/order';
 import styles from '../styles/CheckoutPage.module.css';
 
-type PaymentMethodId = 'pix' | 'credit-card' | 'boleto';
+type PaymentMethodId = OrderPaymentMethod;
 
 type Props = {
-  selectedMethodId?: string;
-  onSubmit: (methodId: string) => void;
+  selectedMethodId?: OrderPaymentMethod;
+  onSubmit: (methodId: OrderPaymentMethod) => void;
   onBack?: () => void;
 };
 
