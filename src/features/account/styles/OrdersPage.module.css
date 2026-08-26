@@ -292,3 +292,29 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+/* Orders data states */
+.stateBox {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  padding: var(--space-6);
+  border: 1px dashed var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.stateBoxError {
+  border-color: rgba(250, 0, 63, 0.4);
+}
+
+.stateTitle {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.stateDescription {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}

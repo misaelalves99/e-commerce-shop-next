@@ -169,7 +169,7 @@ export const SEO_CONFIG: SeoConfig = {
     orders: {
       title: `Pedidos | ${store}`,
       description:
-        'Consulte a experiência demonstrativa de histórico de pedidos.',
+        'Consulte seus pedidos, valores e status no histórico da sua conta.',
       url: base + ROUTES.account.orders,
       image: `${base}/og-account.png`,
       keywords: ['pedidos', 'histórico', 'conta'],

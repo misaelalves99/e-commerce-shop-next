@@ -10,6 +10,11 @@ interface CreateOrderResponse {
   error?: string;
 }
 
+interface ListOrdersResponse {
+  orders?: Order[];
+  error?: string;
+}
+
 export class OrderClientError extends Error {
   readonly status: number;
 
@@ -21,6 +26,46 @@ export class OrderClientError extends Error {
     this.name = 'OrderClientError';
     this.status = status;
   }
+}
+
+async function readJsonResponse<T>(
+  response: Response,
+): Promise<T | null> {
+  try {
+    return (await response.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
+export async function listOrdersFromApi():
+  Promise<Order[]> {
+  const response = await fetch(
+    '/api/orders',
+    {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  );
+
+  const body =
+    await readJsonResponse<ListOrdersResponse>(
+      response,
+    );
+
+  if (
+    !response.ok ||
+    !body ||
+    !Array.isArray(body.orders)
+  ) {
+    throw new OrderClientError(
+      body?.error ??
+        'Não foi possível carregar seus pedidos.',
+      response.status,
+    );
+  }
+
+  return body.orders;
 }
 
 export async function createOrderFromCheckout(
@@ -43,21 +88,17 @@ export async function createOrderFromCheckout(
     }),
   });
 
-  let body: CreateOrderResponse = {};
-
-  try {
-    body =
-      (await response.json()) as CreateOrderResponse;
-  } catch {
-    // Preserve the HTTP status even if the body is malformed.
-  }
+  const body =
+    await readJsonResponse<CreateOrderResponse>(
+      response,
+    );
 
   if (
     response.status !== 201 ||
-    !body.order
+    !body?.order
   ) {
     throw new OrderClientError(
-      body.error ??
+      body?.error ??
         'Não foi possível criar o pedido.',
       response.status,
     );
