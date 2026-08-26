@@ -38,6 +38,7 @@ export interface AuthContextType {
   user: AuthUser | null;
   loading: boolean;
   isAuthenticated: boolean;
+  serverSessionReady: boolean;
 
   loginWithEmail: (
     email: string,
