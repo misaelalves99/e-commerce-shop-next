@@ -53,12 +53,44 @@ export interface AppConfig {
   features: FeaturesConfig;
 }
 
+function resolvePublicSiteUrl(
+  configuredUrl: string | undefined,
+): string {
+  const fallback =
+    'http://localhost:3000';
+
+  const value =
+    configuredUrl?.trim() || fallback;
+
+  let url: URL;
+
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(
+      'NEXT_PUBLIC_SITE_URL must be a valid absolute URL.',
+    );
+  }
+
+  if (
+    url.protocol !== 'http:' &&
+    url.protocol !== 'https:'
+  ) {
+    throw new Error(
+      'NEXT_PUBLIC_SITE_URL must use http or https.',
+    );
+  }
+
+  return url.origin;
+}
 export const APP_CONFIG: AppConfig = {
   branding: {
     storeName: 'E-Commerce Shop Next',
     storeShortName: 'ShopNext',
     tagline: 'Seu e-commerce moderno, rápido e seguro.',
-    baseUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
+    baseUrl: resolvePublicSiteUrl(
+      process.env.NEXT_PUBLIC_SITE_URL,
+    ),
   },
   currency: {
     code: 'BRL',
