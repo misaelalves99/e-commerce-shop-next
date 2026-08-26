@@ -4,12 +4,20 @@
 
 import type { ReactElement } from 'react';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import { useCart } from '@/core/hooks/useCart';
 import { ROUTES } from '@/core/config/routes';
 import type { AddressData } from '@/core/types/address';
+import type {
+  Order,
+  OrderPaymentMethod,
+} from '@/core/types/order';
+import {
+  createOrderFromCheckout,
+  OrderClientError,
+} from '@/core/data/order/order-client';
 
 import CartSummary from '@/features/cart/components/CartSummary';
 import EmptyCartState from '@/features/cart/components/EmptyCartState';
@@ -27,9 +35,12 @@ export default function CheckoutPage(): ReactElement {
 
   const [currentStep, setCurrentStep] = useState<CheckoutStep>('address');
   const [addressData, setAddressData] = useState<AddressData | null>(null);
-  const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<OrderPaymentMethod | null>(null);
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [placedOrder, setPlacedOrder] = useState<Order | null>(null);
+  const [orderError, setOrderError] = useState<string | null>(null);
+  const placingOrderRef = useRef(false);
 
   const currency = useMemo(
     () =>
@@ -47,24 +58,48 @@ export default function CheckoutPage(): ReactElement {
     setCurrentStep('payment');
   };
 
-  const handlePaymentSubmit = (methodId: string) => {
+  const handlePaymentSubmit = (methodId: OrderPaymentMethod) => {
     setPaymentMethod(methodId);
     setCurrentStep('review');
   };
 
   const handlePlaceOrder = async () => {
-    if (!hasItems || !addressData || !paymentMethod) return;
+    if (
+      !hasItems ||
+      !addressData ||
+      !paymentMethod ||
+      placingOrderRef.current
+    ) {
+      return;
+    }
 
+    placingOrderRef.current = true;
     setIsPlacingOrder(true);
+    setOrderError(null);
 
     try {
-      // aqui futuramente você integra com API /order
-      await new Promise((resolve) => setTimeout(resolve, 900));
-      if (typeof clearCart === 'function') {
-        clearCart();
-      }
+      const order = await createOrderFromCheckout(
+        items,
+        addressData,
+        paymentMethod,
+      );
+
+      setPlacedOrder(order);
+
+      // The cart is cleared only after authoritative order creation.
+      clearCart();
       setOrderPlaced(true);
+    } catch (error: unknown) {
+      const message =
+        error instanceof OrderClientError
+          ? error.status === 401
+            ? 'Sua sessão expirou. Entre novamente antes de finalizar o pedido.'
+            : error.message
+          : 'Não foi possível finalizar o pedido. Seu carrinho foi preservado.';
+
+      setOrderError(message);
     } finally {
+      placingOrderRef.current = false;
       setIsPlacingOrder(false);
     }
   };
@@ -131,9 +166,19 @@ export default function CheckoutPage(): ReactElement {
                 Pedido confirmado com sucesso
               </h2>
               <p className={styles.confirmationText}>
-                Enviamos os detalhes do seu pedido para o e-mail cadastrado.
-                Você poderá acompanhar o status em{' '}
-                <Link href={ROUTES.account.orders}>Meus pedidos</Link>.
+                {placedOrder ? (
+                  <>
+                    Pedido <strong>#{placedOrder.number}</strong> criado com
+                    sucesso. Você poderá acompanhar o status em{' '}
+                    <Link href={ROUTES.account.orders}>Meus pedidos</Link>.
+                  </>
+                ) : (
+                  <>
+                    Seu pedido foi confirmado. Você poderá acompanhar o status
+                    em{' '}
+                    <Link href={ROUTES.account.orders}>Meus pedidos</Link>.
+                  </>
+                )}
               </p>
 
               <div className={styles.confirmationActions}>
@@ -275,6 +320,16 @@ export default function CheckoutPage(): ReactElement {
                       </div>
                     )}
                   </div>
+
+                  {orderError && (
+                    <p
+                      role="alert"
+                      aria-live="polite"
+                      className={styles.reviewText}
+                    >
+                      {orderError}
+                    </p>
+                  )}
 
                   <div className={styles.reviewActions}>
                     <button
