@@ -58,7 +58,7 @@ export default function AddressPage() {
         </div>
       </header>
 
-      <main className={styles.content}>
+      <div className={styles.content}>
         <section className={styles.section}>
           <div className={styles.card}>
             <div className={styles.cardHeader}>
@@ -97,7 +97,7 @@ export default function AddressPage() {
             )}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

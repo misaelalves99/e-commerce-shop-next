@@ -10,12 +10,10 @@
 .empty {
   padding: var(--space-10) var(--space-6);
   border-radius: var(--radius-lg);
-  border: 1px dashed var(--color-border-subtle);
-  background: radial-gradient(circle at top left,
-      rgba(0, 0, 255, 0.06),
-      rgba(0, 0, 0, 0.6));
+  border: 1px dashed var(--color-border-soft);
+  background: linear-gradient(135deg, #ffffff, #f7f8fb);
   text-align: center;
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
 }
 
 .emptyTitle {

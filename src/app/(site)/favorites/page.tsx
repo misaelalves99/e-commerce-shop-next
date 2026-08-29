@@ -51,7 +51,7 @@ export default function FavoritesPage() {
   }, [favoriteIds]);
 
   return (
-    <main className="page-container">
+    <div className="page-container">
       <h1>Favoritos</h1>
 
       {products.length === 0 ? (
@@ -59,6 +59,6 @@ export default function FavoritesPage() {
       ) : (
         <ProductGrid products={products} />
       )}
-    </main>
+    </div>
   );
 }

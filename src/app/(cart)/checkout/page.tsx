@@ -23,8 +23,8 @@ export const metadata: Metadata = {
 
 export default function CheckoutRoutePage() {
   return (
-    <main className="page-container">
+    <div className="page-container">
       <CheckoutPage />
-    </main>
+    </div>
   );
 }

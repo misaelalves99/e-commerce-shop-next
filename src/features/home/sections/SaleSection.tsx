@@ -20,7 +20,7 @@ export function SaleSection({ products }: SaleSectionProps) {
       <div className="page-container">
         <DealsCarousel
           title="Ofertas do dia"
-          subtitle="Promoções com cara de Shopee/Shein/Amazon, otimizadas para você aproveitar o máximo hoje."
+          subtitle="Seleções especiais com preços atrativos para você aproveitar as melhores oportunidades do dia."
           products={saleProducts}
           seeAllHref="/products?filter=offers"
         />

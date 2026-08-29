@@ -1,9 +1,11 @@
 // src/app/(auth)/register/page.tsx
 
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 
 import { SEO_CONFIG } from '@/core/config/seo-config';
 import { APP_CONFIG } from '@/core/config/app-config';
+import { RequireGuest } from '@/core/auth/auth-guards';
 import RegisterPage from '@/features/auth/pages/RegisterPage';
 
 export const metadata: Metadata = {
@@ -22,8 +24,12 @@ export const metadata: Metadata = {
 
 export default function RegisterRoutePage() {
   return (
-    <main className="page-container">
-      <RegisterPage />
-    </main>
+    <div className="page-container">
+      <Suspense fallback={null}>
+        <RequireGuest>
+          <RegisterPage />
+        </RequireGuest>
+      </Suspense>
+    </div>
   );
 }

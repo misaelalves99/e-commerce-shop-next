@@ -23,7 +23,7 @@ export default function CartPage(): ReactElement {
 
   if (!hasItems) {
     return (
-      <main className={styles.page}>
+      <div className={styles.page}>
         <section className={styles.header}>
           <h1 className={styles.title}>Seu carrinho</h1>
           <p className={styles.subtitle}>
@@ -37,12 +37,12 @@ export default function CartPage(): ReactElement {
           description="Navegue pelo catálogo de produtos e encontre itens com o melhor custo-benefício em um visual inspirado nos grandes players do mercado."
           href={ROUTES.catalog}
         />
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className={styles.page}>
+    <div className={styles.page}>
       <section className={styles.header}>
         <h1 className={styles.title}>Seu carrinho</h1>
 
@@ -81,6 +81,6 @@ export default function CartPage(): ReactElement {
           <CartSummary subtotal={subtotal} totalItems={totalItems} />
         </aside>
       </section>
-    </main>
+    </div>
   );
 }

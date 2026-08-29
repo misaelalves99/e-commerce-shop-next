@@ -1,5 +1,5 @@
 
-// src/features/catalog/components/ProductCard.tsx
+// src/shared/ui/ProductCard/ProductCard.tsx
 
 'use client';
 
@@ -11,13 +11,15 @@ import { FiHeart, FiShoppingCart } from 'react-icons/fi';
 
 import type { Product } from '@/core/types/product';
 import { ROUTES } from '@/core/config/routes';
-import styles from '../styles/ProductCard.module.css';
+import styles from './ProductCard.module.css';
 
 export interface ProductCardProps {
   product: Product;
   isFavorite?: boolean;
   onToggleFavorite?: () => void;
   onAddToCart?: (product: Product) => void;
+  showFavoriteControl?: boolean;
+  showCartAction?: boolean;
 }
 
 export default function ProductCard({
@@ -25,6 +27,8 @@ export default function ProductCard({
   isFavorite = false,
   onToggleFavorite,
   onAddToCart,
+  showFavoriteControl = true,
+  showCartAction = true,
 }: ProductCardProps): ReactElement {
   const {
     id,
@@ -72,19 +76,21 @@ export default function ProductCard({
   return (
     <article className={styles.card} data-product-id={id}>
       <div className={styles.cardInner}>
-        <button
-          type="button"
-          className={
-            isFavorite
-              ? `${styles.favoriteButton} ${styles.favoriteButtonActive}`
-              : styles.favoriteButton
-          }
-          aria-pressed={isFavorite}
-          aria-label={isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
-          onClick={handleFavoriteClick}
-        >
-          <FiHeart className={styles.favoriteIcon} />
-        </button>
+        {showFavoriteControl && (
+          <button
+                    type="button"
+                    className={
+                      isFavorite
+                        ? `${styles.favoriteButton} ${styles.favoriteButtonActive}`
+                        : styles.favoriteButton
+                    }
+                    aria-pressed={isFavorite}
+                    aria-label={isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+                    onClick={handleFavoriteClick}
+                  >
+                    <FiHeart className={styles.favoriteIcon} />
+                  </button>
+        )}
 
         {hasDiscount && (
           <div className={styles.discountBadge} aria-label={`-${computedDiscount}%`}>
@@ -165,16 +171,18 @@ export default function ProductCard({
           </div>
         </div>
 
-        <div className={styles.actions}>
-          <button
-            type="button"
-            className={styles.primaryButton}
-            onClick={handleAddToCartClick}
-          >
-            <FiShoppingCart className={styles.primaryButtonIcon} />
-            <span>Adicionar ao carrinho</span>
-          </button>
-        </div>
+        {showCartAction && (
+          <div className={styles.actions}>
+                    <button
+                      type="button"
+                      className={styles.primaryButton}
+                      onClick={handleAddToCartClick}
+                    >
+                      <FiShoppingCart className={styles.primaryButtonIcon} />
+                      <span>Adicionar ao carrinho</span>
+                    </button>
+                  </div>
+        )}
       </div>
     </article>
   );

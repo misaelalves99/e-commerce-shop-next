@@ -59,11 +59,11 @@ export default function HomePage() {
   );
 
   return (
-    <main>
+    <div>
       <AdvertisingSection categories={categories} />
       <SaleSection products={products} />
       <EmphasisSection products={products} />
       <EvaluatedSection products={products} />
-    </main>
+    </div>
   );
 }

@@ -19,7 +19,7 @@ export function AdvertisingSection({ categories }: AdvertisingSectionProps) {
         <HeroBanner
           title="Tudo o que você precisa em um só lugar"
           eyebrow="Festival de Ofertas"
-          subtitle="Ofertas em tempo real, inspirações de Shopee/Shein/Amazon e uma experiência pensada para o seu dia a dia."
+          subtitle="Ofertas selecionadas, categorias para todos os momentos e uma experiência de compra simples para o seu dia a dia."
           primaryCta={{ label: 'Ver ofertas de hoje', href: '/products' }}
           secondaryCta={{ label: 'Explorar categorias', href: '/products' }}
           highlightCouponCode="PRIMEIRA10"

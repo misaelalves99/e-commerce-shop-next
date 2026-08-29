@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 
 export default function SecurityRoutePage() {
   return (
-    <main className="page-container">
+    <div className="page-container">
       <SecurityPage />
-    </main>
+    </div>
   );
 }

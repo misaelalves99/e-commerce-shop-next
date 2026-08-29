@@ -18,7 +18,7 @@
   --color-pink-500:   #fa003f;
   --color-green-500:  #00916e;
 
-  /* Neutros (dark commerce premium) */
+  /* Neutros */
   --color-gray-950: #050508;
   --color-gray-900: #0b0b10;
   --color-gray-850: #101018;
@@ -83,47 +83,47 @@
   --color-danger-soft:        rgba(250, 0, 63, 0.18);
   --color-on-danger:          var(--color-white);
 
-  /* Fundo e superfícies (dark commerce premium) */
-  --color-bg-body:            radial-gradient(circle at top, #15151f 0, #050508 55%, #000000 100%);
-  --color-bg-page:            var(--color-gray-950);
-  --color-bg-surface:         #11111b;
-  --color-bg-surface-soft:    rgba(255, 255, 255, 0.02);
-  --color-bg-surface-strong:  #181824;
-  --color-bg-elevated:        #1b1b28;
-  --color-bg-header:          rgba(5, 5, 15, 0.92);
-  --color-bg-header-strong:   radial-gradient(circle at top left, rgba(0, 0, 255, 0.24), rgba(0, 0, 0, 0.9));
-  --color-bg-footer:          #05050a;
-  --color-bg-chip:            rgba(255, 255, 255, 0.04);
-  --color-bg-input:           rgba(255, 255, 255, 0.03);
-  --color-bg-input-hover:     rgba(255, 255, 255, 0.06);
-  --color-bg-input-disabled:  rgba(255, 255, 255, 0.02);
+  /* Fundo e superfícies (light commerce) */
+  --color-bg-body:            #f7f8fb;
+  --color-bg-page:            #f7f8fb;
+  --color-bg-surface:         #ffffff;
+  --color-bg-surface-soft:    #f4f6fa;
+  --color-bg-surface-strong:  #eef1f6;
+  --color-bg-elevated:        #ffffff;
+  --color-bg-header:          rgba(255, 255, 255, 0.94);
+  --color-bg-header-strong:   linear-gradient(180deg, #ffffff 0%, #f8f9fc 100%);
+  --color-bg-footer:          #111827;
+  --color-bg-chip:            #f1f3f7;
+  --color-bg-input:           #ffffff;
+  --color-bg-input-hover:     #f8f9fb;
+  --color-bg-input-disabled:  #f1f3f6;
 
   /* Texto */
-  --color-text-primary:       #f5f5ff;
-  --color-text-secondary:     #c1c1d7;
-  --color-text-muted:         #8b8ba5;
-  --color-text-soft:          #a3a3c2;
-  --color-text-inverse:       #050508;
-  --color-text-link:          #7ea5ff;
-  --color-text-link-hover:    #a8c0ff;
-  --color-text-placeholder:   #686883;
+  --color-text-primary:       #111827;
+  --color-text-secondary:     #5f6878;
+  --color-text-muted:         #7b8493;
+  --color-text-soft:          #687386;
+  --color-text-inverse:       #ffffff;
+  --color-text-link:          #0000d6;
+  --color-text-link-hover:    #0000ac;
+  --color-text-placeholder:   #9299a6;
 
   /* Bordas e divisores */
-  --color-border-subtle:      rgba(255, 255, 255, 0.06);
-  --color-border-soft:        rgba(255, 255, 255, 0.1);
-  --color-border-strong:      rgba(255, 255, 255, 0.18);
+  --color-border-subtle:      #e6e9ef;
+  --color-border-soft:        #d9dee7;
+  --color-border-strong:      #c5ccd8;
   --color-border-focus:       rgba(0, 0, 255, 0.75);
   --color-border-error:       rgba(250, 0, 63, 0.85);
 
   /* Overlays, sombras e glow */
-  --color-backdrop:           rgba(0, 0, 0, 0.7);
-  --shadow-soft:              0 10px 30px rgba(0, 0, 0, 0.45);
-  --shadow-strong:            0 20px 40px rgba(0, 0, 0, 0.7);
-  --shadow-elevated:          0 16px 40px rgba(3, 7, 18, 0.85);
+  --color-backdrop:           rgba(15, 23, 42, 0.52);
+  --shadow-soft:              0 10px 30px rgba(15, 23, 42, 0.07);
+  --shadow-strong:            0 20px 50px rgba(15, 23, 42, 0.12);
+  --shadow-elevated:          0 16px 40px rgba(15, 23, 42, 0.1);
 
-  --shadow-brand-glow:        0 0 22px rgba(0, 0, 255, 0.45);
-  --shadow-accent-glow:       0 0 26px rgba(250, 0, 63, 0.5);
-  --shadow-card-glow-soft:    0 0 18px rgba(126, 165, 255, 0.25);
+  --shadow-brand-glow:        0 8px 24px rgba(0, 0, 255, 0.16);
+  --shadow-accent-glow:       0 8px 24px rgba(250, 0, 63, 0.14);
+  --shadow-card-glow-soft:    0 8px 24px rgba(15, 23, 42, 0.06);
 
   /* =====================================================================
    * 3. TIPOGRAFIA
@@ -308,8 +308,8 @@
 
   /* Skeleton */
   --skeleton-radius:      var(--radius-sm);
-  --skeleton-bg:          rgba(255, 255, 255, 0.06);
-  --skeleton-shine:       rgba(255, 255, 255, 0.18);
+  --skeleton-bg:          #e9edf3;
+  --skeleton-shine:       #f7f9fc;
 
   /* Drawer / Mini-cart */
   --drawer-width-sm:      100%;

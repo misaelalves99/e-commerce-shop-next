@@ -14,13 +14,8 @@
  * ========================= */
 
 .topBar {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  background: radial-gradient(
-      circle at 0 0,
-      rgba(0, 0, 255, 0.35),
-      transparent 50%
-    ),
-    rgba(5, 5, 16, 0.98);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: #f7f8fb;
 }
 
 .topBarContent {
@@ -52,12 +47,8 @@
  * ========================= */
 
 .mainBar {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  background: linear-gradient(
-      120deg,
-      rgba(0, 0, 20, 0.98),
-      rgba(5, 5, 16, 0.98)
-    );
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: rgba(255, 255, 255, 0.98);
 }
 
 .mainBarInner {
@@ -65,7 +56,7 @@
   margin: 0 auto;
   padding: 0.7rem var(--space-page-x);
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 2.2fr) minmax(0, 1.7fr);
+  grid-template-columns: minmax(210px, 0.85fr) minmax(300px, 1.35fr) minmax(390px, 1.3fr);
   align-items: center;
   column-gap: 1.2rem;
 }
@@ -149,6 +140,7 @@
  * ========================= */
 
 .searchWrapper {
+  min-width: 0;
   display: block;
 }
 
@@ -158,9 +150,19 @@
   gap: 0.5rem;
   padding: 0.35rem;
   border-radius: var(--radius-pill);
-  background: var(--color-bg-surface-soft);
-  border: 1px solid var(--color-border-subtle);
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.3);
+  background: #f7f8fb;
+  border: 1px solid var(--color-border-soft);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.searchForm:focus-within {
+  background: #ffffff;
+  border-color: rgba(0, 0, 255, 0.28);
+  box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.06);
 }
 
 .searchIcon {
@@ -211,6 +213,8 @@
  * ========================= */
 
 .actions {
+  min-width: 0;
+  white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -271,6 +275,8 @@
 /* User */
 
 .userArea {
+  min-width: 0;
+  flex: 0 1 12rem;
   display: flex;
   align-items: center;
 }
@@ -294,13 +300,9 @@
 }
 
 .loginButton:hover {
-  background: radial-gradient(
-      circle at 0 0,
-      rgba(0, 0, 255, 0.16),
-      transparent 60%
-    );
-  border-color: var(--color-primary);
-  color: var(--color-text-primary);
+  background: var(--color-primary-subtle);
+  border-color: rgba(0, 0, 255, 0.28);
+  color: var(--color-primary);
   transform: translateY(-1px);
 }
 
@@ -313,12 +315,9 @@
  * ========================= */
 
 .navBar {
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
-  background: linear-gradient(
-    90deg,
-    rgba(15, 23, 42, 0.98),
-    rgba(15, 23, 42, 0.96)
-  );
+  border-top: 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: #ffffff;
 }
 
 .navInner {
@@ -367,14 +366,9 @@
 }
 
 .navLinkActive {
-  background: radial-gradient(
-      circle at 0 0,
-      rgba(0, 0, 255, 0.36),
-      transparent 60%
-    ),
-    rgba(15, 23, 42, 0.98);
+  background: var(--color-primary-subtle);
   color: var(--color-primary);
-  box-shadow: var(--shadow-brand-glow);
+  box-shadow: none;
 }
 
 .navIcon {
@@ -391,8 +385,8 @@
 
 .mobileSearch {
   display: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  background: var(--color-bg-page);
+  border-top: 1px solid var(--color-border-subtle);
+  background: #ffffff;
 }
 
 .mobileSearchForm {
@@ -411,9 +405,9 @@
 
 .mobileSearchInput {
   flex: 1;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-border-soft);
   border-radius: var(--radius-pill);
-  background: rgba(15, 23, 42, 0.9);
+  background: #f7f8fb;
   padding: 0.45rem 0.8rem;
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
@@ -427,6 +421,21 @@
  * RESPONSIVO
  * ========================= */
 
+
+@media (max-width: 1280px) and (min-width: 1025px) {
+  .mainBarInner {
+    grid-template-columns: minmax(200px, 0.85fr) minmax(300px, 1.25fr) minmax(340px, 1.2fr);
+    gap: var(--space-4);
+  }
+
+  .brandSubtitle {
+    display: none;
+  }
+
+  .actionLabel {
+    display: none;
+  }
+}
 @media (max-width: 1024px) {
   .mainBarInner {
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
@@ -434,10 +443,13 @@
   }
 
   .searchWrapper {
+  min-width: 0;
     grid-column: 1 / -1;
   }
 
   .actions {
+  min-width: 0;
+  white-space: nowrap;
     justify-content: flex-end;
   }
 
@@ -452,6 +464,7 @@
   }
 
   .searchWrapper {
+  min-width: 0;
     display: none;
   }
 
@@ -464,6 +477,8 @@
   }
 
   .actions {
+  min-width: 0;
+  white-space: nowrap;
     gap: 0.7rem;
   }
 

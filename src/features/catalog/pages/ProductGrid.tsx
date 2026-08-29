@@ -6,7 +6,7 @@
 import type { ReactElement } from 'react';
 
 import type { Product } from '@/core/types/product';
-import ProductCard from './ProductCard';
+import ProductCard from '@/shared/ui/ProductCard/ProductCard';
 import ProductCardSkeleton from './ProductCardSkeleton';
 import styles from '../styles/ProductGrid.module.css';
 

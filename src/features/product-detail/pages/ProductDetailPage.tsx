@@ -7,7 +7,7 @@ import ProductPriceBlock from '../components/ProductPriceBlock';
 import ProductInfoTabs from '../components/ProductInfoTabs';
 import AddToCartSection from '../components/AddToCartSection';
 
-import ProductCard from '@/features/catalog/pages/ProductCard';
+import ProductCard from '@/shared/ui/ProductCard/ProductCard';
 import type { Product } from '@/core/types/product';
 
 import styles from '../styles/ProductDetail.module.css';

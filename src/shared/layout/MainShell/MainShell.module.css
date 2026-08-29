@@ -17,16 +17,7 @@
 
 .pageContainer {
   flex: 1;
-  max-width: var(--container-xl);
-  margin: 0 auto;
-  padding: var(--space-page-y) var(--space-page-x);
+  width: 100%;
 }
 
 /* Responsivo */
-
-@media (max-width: 640px) {
-  .pageContainer {
-    padding-inline: var(--space-3);
-    padding-block: var(--space-5);
-  }
-}

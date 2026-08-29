@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 
 export default function ProfileRoutePage() {
   return (
-    <main className="page-container">
+    <div className="page-container">
       <ProfilePage />
-    </main>
+    </div>
   );
 }

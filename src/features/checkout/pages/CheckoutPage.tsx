@@ -106,7 +106,7 @@ export default function CheckoutPage(): ReactElement {
 
   if (!hasItems && !orderPlaced) {
     return (
-      <main className={styles.page}>
+      <div className={styles.page}>
         <header className={styles.header}>
           <h1 className={styles.title}>Finalizar compra</h1>
           <p className={styles.subtitle}>
@@ -120,12 +120,12 @@ export default function CheckoutPage(): ReactElement {
           description="Adicione produtos ao carrinho para visualizar o fluxo completo de checkout, como nos grandes e-commerces do mercado."
           href={ROUTES.catalog}
         />
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className={styles.page}>
+    <div className={styles.page}>
       <header className={styles.header}>
         <h1 className={styles.title}>Finalizar compra</h1>
         <p className={styles.subtitle}>
@@ -361,6 +361,6 @@ export default function CheckoutPage(): ReactElement {
           </aside>
         )}
       </section>
-    </main>
+    </div>
   );
 }
