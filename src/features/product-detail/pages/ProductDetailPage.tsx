@@ -7,7 +7,7 @@ import ProductPriceBlock from '../components/ProductPriceBlock';
 import ProductInfoTabs from '../components/ProductInfoTabs';
 import AddToCartSection from '../components/AddToCartSection';
 
-import ProductCard from '@/features/catalog/pages/ProductCard';
+import ProductCard from '@/shared/ui/ProductCard/ProductCard';
 import type { Product } from '@/core/types/product';
 
 import styles from '../styles/ProductDetail.module.css';
@@ -96,8 +96,8 @@ export default function ProductDetailPage({
           <div className={styles.relatedHeader}>
             <h2 className={styles.relatedTitle}>Você também pode gostar</h2>
             <p className={styles.relatedSubtitle}>
-              Selecionamos produtos com base na categoria e no comportamento de compras
-              em e-commerces modernos.
+              Confira outras opções da mesma categoria que podem combinar com
+              sua compra.
             </p>
           </div>
 

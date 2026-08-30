@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 
 import { SEO_CONFIG } from '@/core/config/seo-config';
 import { APP_CONFIG } from '@/core/config/app-config';
+import { RequireGuest } from '@/core/auth/auth-guards';
 import LoginPage from '@/features/auth/pages/LoginPage';
 
 export const metadata: Metadata = {
@@ -39,10 +40,12 @@ function LoginFallback() {
 
 export default function LoginRoutePage() {
   return (
-    <main className="page-container">
+    <div className="page-container">
       <Suspense fallback={<LoginFallback />}>
-        <LoginPage />
+        <RequireGuest>
+          <LoginPage />
+        </RequireGuest>
       </Suspense>
-    </main>
+    </div>
   );
 }

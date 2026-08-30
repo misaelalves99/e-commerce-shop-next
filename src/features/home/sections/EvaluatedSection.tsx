@@ -40,7 +40,7 @@ export function EvaluatedSection({ products }: EvaluatedSectionProps) {
               id: 'most-reviewed',
               title: 'Mais buscados do momento',
               subtitle:
-                'Itens que estão em alta agora no catálogo, inspirados nas experiências de grandes marketplaces.',
+                'Itens em destaque no catálogo, reunidos para facilitar a descoberta de produtos populares.',
               products: mostReviewed,
               href: '/products?sort=trending',
             },

@@ -115,15 +115,14 @@ export default function PaymentMethods({
         <aside className={styles.paymentAside}>
           <h3 className={styles.paymentAsideTitle}>Resumo da forma de pagamento</h3>
           <p className={styles.paymentAsideText}>
-            Você pode ajustar as regras e integrações reais depois, conectando
-            este fluxo às APIs do seu provedor de pagamento favorito (Stripe,
-            Mercado Pago, Pagar.me, etc.).
+            Confira a opção selecionada e revise as condições antes de
+            continuar.
           </p>
 
           <ul className={styles.paymentAsideList}>
-            <li>Layout inspirado em e-commerces de alto volume.</li>
-            <li>Cards responsivos, prontos para mobile e desktop.</li>
-            <li>Preparado para exibir taxas, parcelas, juros e prazos.</li>
+            <li>Confira a forma de pagamento selecionada.</li>
+            <li>Revise valores e condições antes de confirmar.</li>
+            <li>Você pode voltar e alterar sua escolha quando quiser.</li>
           </ul>
         </aside>
       </div>

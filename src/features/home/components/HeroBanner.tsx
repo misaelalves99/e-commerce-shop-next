@@ -129,11 +129,10 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
             </div>
           ) : (
             <div className={styles.heroPlaceholder}>
-              <span className={styles.heroPlaceholderBadge}>Catálogo dinâmico</span>
+              <span className={styles.heroPlaceholderBadge}>Seleção em destaque</span>
               <p className={styles.heroPlaceholderText}>
-                Monte campanhas, banners e vitrines usando o catálogo estático da
-                aplicação. Este bloco pode ser substituído por um banner gerenciado
-                via CMS futuramente.
+                Explore produtos selecionados, ofertas especiais e categorias pensadas para
+                facilitar sua próxima compra.
               </p>
             </div>
           )}

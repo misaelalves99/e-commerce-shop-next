@@ -76,7 +76,7 @@ export default function ProfilePage() {
         )}
       </header>
 
-      <main className={styles.content}>
+      <div className={styles.content}>
         <section className={styles.section}>
           <div className={styles.card}>
             <div className={styles.cardHeader}>
@@ -98,7 +98,7 @@ export default function ProfilePage() {
             />
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

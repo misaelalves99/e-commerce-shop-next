@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="page-container page-stack-lg">
+    <div className="page-container page-stack-lg">
       <section className="section-card section-card--lg">
         <header className="section-header">
           <div className="section-header-main">
@@ -115,6 +115,6 @@ export default function ContactPage() {
           </ul>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

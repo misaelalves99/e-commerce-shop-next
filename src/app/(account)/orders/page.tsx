@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 
 export default function OrdersRoutePage() {
   return (
-    <main className="page-container">
+    <div className="page-container">
       <OrdersPage />
-    </main>
+    </div>
   );
 }

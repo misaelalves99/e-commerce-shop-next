@@ -53,7 +53,7 @@ export default function LoginPage() {
       <div className={styles.content}>
         {/* Lado esquerdo: Hero / mensagem de marca */}
         <section className={styles.hero}>
-          <div className={styles.heroBadge}>e-commerce-shop-next</div>
+          <div className={styles.heroBadge}>Sua conta, suas escolhas</div>
 
           <h1 className={styles.heroTitle}>
             Bem-vindo de volta à sua{' '}
@@ -62,7 +62,7 @@ export default function LoginPage() {
 
           <p className={styles.heroSubtitle}>
             Entre para continuar de onde parou, ver seus favoritos, acompanhar
-            pedidos e finalizar suas compras com segurança estilo Shopee/Shein.
+            pedidos e finalizar suas compras com praticidade e segurança.
           </p>
 
           <ul className={styles.heroList}>

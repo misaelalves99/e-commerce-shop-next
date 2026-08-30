@@ -14,11 +14,13 @@ import styles from '../styles/CartPage.module.css';
 type Props = {
   subtotal: number;
   totalItems: number;
+  showCheckoutAction?: boolean;
 };
 
 export default function CartSummary({
   subtotal,
   totalItems,
+  showCheckoutAction = true,
 }: Props): ReactElement {
   const currency = useMemo(
     () =>
@@ -73,6 +75,8 @@ export default function CartSummary({
       </div>
 
       <div className={styles.summaryActions}>
+        {showCheckoutAction && (
+          <>
         <Link href={ROUTES.checkout} className={styles.summaryPrimaryButton}>
           Finalizar compra
         </Link>
@@ -81,6 +85,9 @@ export default function CartSummary({
           Ao finalizar a compra você concorda com os termos de uso e política de
           privacidade da loja.
         </p>
+
+          </>
+        )}
 
         <Link href={ROUTES.catalog} className={styles.summarySecondaryLink}>
           Escolher mais produtos

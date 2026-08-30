@@ -169,7 +169,7 @@ export default function ProductsPage({
           />
         </aside>
 
-        <main className="page-layout__content">
+        <div className="page-layout__content">
           <ProductSortBar
             total={total}
             sort={sortOption}
@@ -183,7 +183,7 @@ export default function ProductsPage({
             onToggleFavorite={toggleFavorite}
             onAddToCart={addItem}
           />
-        </main>
+        </div>
       </div>
     </section>
   );

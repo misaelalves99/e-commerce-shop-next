@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 
-import styles from '../styles/ProductCard.module.css';
+import styles from '@/shared/ui/ProductCard/ProductCard.module.css';
 
 export default function ProductCardSkeleton(): ReactElement {
   return (

@@ -19,6 +19,7 @@ test('protected routes include exact and nested paths', () => {
   assert.equal(isProtectedRoute('/profile'), true);
   assert.equal(isProtectedRoute('/profile/preferences'), true);
   assert.equal(isProtectedRoute('/checkout'), true);
+  assert.equal(isProtectedRoute('/cart'), false);
   assert.equal(isProtectedRoute('/products'), false);
 });
 

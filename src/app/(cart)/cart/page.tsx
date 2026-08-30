@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 
 export default function CartRoutePage() {
   return (
-    <main className="page-container">
+    <div className="page-container">
       <CartPage />
-    </main>
+    </div>
   );
 }

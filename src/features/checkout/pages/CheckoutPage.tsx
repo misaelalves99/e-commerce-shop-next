@@ -106,7 +106,7 @@ export default function CheckoutPage(): ReactElement {
 
   if (!hasItems && !orderPlaced) {
     return (
-      <main className={styles.page}>
+      <div className={styles.page}>
         <header className={styles.header}>
           <h1 className={styles.title}>Finalizar compra</h1>
           <p className={styles.subtitle}>
@@ -117,21 +117,20 @@ export default function CheckoutPage(): ReactElement {
 
         <EmptyCartState
           ctaLabel="Ver ofertas"
-          description="Adicione produtos ao carrinho para visualizar o fluxo completo de checkout, como nos grandes e-commerces do mercado."
+          description="Adicione produtos ao carrinho para continuar com a finalização da compra."
           href={ROUTES.catalog}
         />
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className={styles.page}>
+    <div className={styles.page}>
       <header className={styles.header}>
         <h1 className={styles.title}>Finalizar compra</h1>
         <p className={styles.subtitle}>
           Revise seus dados, escolha a forma de pagamento e confirme seu pedido
-          com segurança, em uma experiência inspirada nos grandes players como
-          Shopee, Shein e Amazon.
+          com segurança.
         </p>
 
         {!orderPlaced && (
@@ -223,8 +222,8 @@ export default function CheckoutPage(): ReactElement {
                   <header className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>Pagamento</h2>
                     <p className={styles.sectionSubtitle}>
-                      Escolha a forma de pagamento que preferir. Este fluxo
-                      está pronto para ser integrado com APIs reais depois.
+                      Escolha a forma de pagamento que preferir para continuar
+                      com a sua compra.
                     </p>
                   </header>
 
@@ -357,10 +356,14 @@ export default function CheckoutPage(): ReactElement {
 
         {!orderPlaced && (
           <aside className={styles.summaryColumn}>
-            <CartSummary subtotal={subtotal} totalItems={totalItems} />
+            <CartSummary
+              subtotal={subtotal}
+              totalItems={totalItems}
+              showCheckoutAction={false}
+            />
           </aside>
         )}
       </section>
-    </main>
+    </div>
   );
 }
