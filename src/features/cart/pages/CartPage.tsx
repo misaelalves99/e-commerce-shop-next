@@ -34,7 +34,7 @@ export default function CartPage(): ReactElement {
 
         <EmptyCartState
           ctaLabel="Ver ofertas"
-          description="Navegue pelo catálogo de produtos e encontre itens com o melhor custo-benefício em um visual inspirado nos grandes players do mercado."
+          description="Navegue pelo catálogo e encontre produtos para adicionar ao seu carrinho."
           href={ROUTES.catalog}
         />
       </div>

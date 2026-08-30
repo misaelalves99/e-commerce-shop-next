@@ -34,8 +34,8 @@ export default function EmptyCartState({
       </Link>
 
       <p className={styles.emptyHint}>
-        Dica: organize seus favoritos e acompanhe promoções relâmpago para
-        aproveitar os melhores preços, como nos grandes e-commerces do mercado.
+        Dica: salve seus produtos favoritos e acompanhe as ofertas para
+        encontrar boas oportunidades.
       </p>
     </section>
   );

@@ -15,7 +15,6 @@ const PROTECTED_PATHS = [
   '/address',
   '/security',
   '/orders',
-  '/cart',
   '/checkout',
 ];
 
@@ -87,7 +86,6 @@ export const config = {
     '/address/:path*',
     '/security/:path*',
     '/orders/:path*',
-    '/cart/:path*',
     '/checkout/:path*',
   ],
 };

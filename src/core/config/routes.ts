@@ -40,7 +40,6 @@ export const PROTECTED_ROUTES_PREFIXES: string[] = [
   '/address',
   '/security',
   '/orders',
-  '/cart',
   '/checkout',
 ];
 

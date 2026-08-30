@@ -86,6 +86,11 @@ export function RequireGuest({
   const sessionInvalid =
     searchParams.get('sessionInvalid') === '1';
 
+  const requestedRedirect = resolveAppRoute(
+    searchParams.get('redirectTo'),
+    redirectTo,
+  );
+
   useEffect(() => {
     if (
       loading ||
@@ -95,11 +100,11 @@ export function RequireGuest({
       return;
     }
 
-    router.replace(redirectTo);
+    router.replace(requestedRedirect);
   }, [
     isAuthenticated,
     loading,
-    redirectTo,
+    requestedRedirect,
     router,
     sessionInvalid,
   ]);

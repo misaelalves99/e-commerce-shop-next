@@ -11,7 +11,7 @@
       rgba(0, 0, 255, 0.12),
       transparent 55%
     ),
-    rgba(10, 10, 20, 0.96);
+    var(--color-bg-surface);
 }
 
 .list {
@@ -96,7 +96,7 @@
   background: radial-gradient(
     circle at top left,
     rgba(0, 0, 255, 0.32),
-    rgba(5, 5, 15, 0.96)
+    var(--color-bg-surface)
   );
   border-color: var(--color-border-focus);
   box-shadow: var(--shadow-brand-glow);
@@ -155,7 +155,7 @@
   background: linear-gradient(
     to right,
     transparent,
-    rgba(255, 255, 255, 0.32),
+    rgba(15, 23, 42, 0.18),
     transparent
   );
 }
