@@ -1,4 +1,4 @@
-﻿# E-Commerce Shop Next — Case Study
+# E-Commerce Shop Next — Case Study
 
 This directory contains the technical case-study documentation for the project.
 
@@ -21,6 +21,8 @@ The case documents the current certified implementation of the application, incl
 - [Engineering Decisions](./engineering-decisions.md)
 - [Quality & Security](./quality-security.md)
 - [Evidence Plan](./evidence-plan.md)
+- [Visual Evidence](./evidence/README.md)
+- [Publication Evidence Selection](./evidence/PUBLICATION_SELECTION.md)
 
 ## Evidence policy
 

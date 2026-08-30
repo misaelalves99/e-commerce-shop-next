@@ -77,7 +77,7 @@ Public Firebase browser configuration and server-only credentials are intentiona
 
 Detailed technical documentation is available under [`docs/case/`](./docs/case/README.md).
 
-The case documentation covers architecture, implemented capabilities, engineering decisions, quality and security posture, and publication evidence planning.
+The case documentation covers architecture, implemented capabilities, engineering decisions, quality and security posture, and the publication-selected visual evidence set.
 
 ## Project boundaries
 

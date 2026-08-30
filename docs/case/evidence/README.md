@@ -1,104 +1,97 @@
-﻿# Visual Evidence Manifest
+# Visual Evidence Manifest
 
 ## Purpose
 
-This directory stores publication-selected evidence for the E-Commerce Shop Next case study.
+This directory stores publication-selected visual evidence for the E-Commerce Shop Next case study.
 
-Evidence must demonstrate verified application behavior without exposing private or security-sensitive information.
+The primary evidence set demonstrates verified application behavior while preserving the privacy boundary defined for public case material.
 
-## Planned captures
+## Primary publication evidence
 
 ### 01 — Home / Catalog
 
-Purpose:
-Show the public storefront, product discovery experience, and overall visual identity.
-
-Expected route:
-`/` or `/products`
+Asset:
+[`01-home-catalog/home-catalog.png`](./01-home-catalog/home-catalog.png)
 
 Evidence value:
-Demonstrates the public commerce surface and catalog presentation.
+Demonstrates the public storefront, product discovery surface, and overall visual identity.
 
 ### 02 — Product Detail
 
-Purpose:
-Show an individual product view and purchase-oriented interaction context.
-
-Expected route:
-`/product/[id]`
+Asset:
+[`02-product-detail/product-detail.png`](./02-product-detail/product-detail.png)
 
 Evidence value:
-Demonstrates product detail composition and catalog integration.
+Demonstrates an individual product view, catalog integration, pricing presentation, quantity controls, and purchase-oriented actions.
 
-### 03 — Cart
+### 03 — Guest Cart
 
-Purpose:
-Show selected products, quantities, and transition toward checkout.
-
-Expected route:
-`/cart`
+Asset:
+[`03-cart/cart.png`](./03-cart/cart.png)
 
 Evidence value:
-Demonstrates commerce-state behavior before order creation.
+Demonstrates guest commerce state, selected product state, quantity controls, purchase summary, and transition toward authenticated checkout.
 
-### 04 — Checkout
+### 04 — Authenticated Checkout
 
-Purpose:
-Show the multi-step authenticated checkout flow.
-
-Expected route:
-`/checkout`
+Asset:
+[`04-checkout/checkout.png`](./04-checkout/checkout.png)
 
 Evidence value:
-Demonstrates address, payment-method, and review workflow.
+Demonstrates authenticated checkout state and the multi-step payment and order-review workflow.
 
 ### 05 — Order Creation Success
 
-Purpose:
-Show the successful result of creating a persisted order.
-
-Expected context:
-Checkout success state or immediate post-order state.
+Asset:
+[`05-order-success/order-success.png`](./05-order-success/order-success.png)
 
 Evidence value:
-Demonstrates completion of the checkout-to-order flow.
+Demonstrates successful completion of the implemented checkout-to-order flow.
 
 ### 06 — Persisted Orders
 
-Purpose:
-Show authenticated order history backed by persisted application data.
-
-Expected route:
-`/orders`
+Asset:
+[`06-orders/orders.png`](./06-orders/orders.png)
 
 Evidence value:
-Demonstrates that orders survive navigation/reload and are read from the persisted order source.
+Demonstrates authenticated order history backed by persisted application data after successful order creation.
 
-### 07 — Account / Profile
+## Canonical narrative
 
-Purpose:
-Show the authenticated account experience and persisted profile/address context.
+The selected primary evidence forms one continuous commerce narrative:
 
-Expected route:
-`/profile` or `/address`
+`Home / Catalog -> Product Detail -> Guest Cart -> Authenticated Checkout -> Order Success -> Persisted Orders`
 
-Evidence value:
-Demonstrates the account persistence surface.
+## Secondary evidence
 
-## Optional capture
+### Account / Profile
+
+Status:
+Not selected for primary publication.
+
+The primary set already demonstrates authenticated state and persisted customer-facing behavior. A profile screenshot would provide limited additional evidence while increasing the privacy surface.
 
 ### Authentication Entry
 
-Expected route:
-`/login`
+Status:
+Not selected for primary publication.
 
-Use only if it improves the case narrative.
+Authentication remains operationally relevant, but the login screen does not add enough distinct evidence to the primary commerce narrative.
 
-The final publication set does not need to include every operational screen.
+## Evidence contracts
 
-## Capture rules
+Capture requirements:
+[`CAPTURE_PROTOCOL.md`](./CAPTURE_PROTOCOL.md)
 
-Final evidence must not expose:
+Authenticated evidence privacy boundary:
+[`AUTHENTICATED_EVIDENCE_POLICY.md`](./AUTHENTICATED_EVIDENCE_POLICY.md)
+
+Final publication selection:
+[`PUBLICATION_SELECTION.md`](./PUBLICATION_SELECTION.md)
+
+## Publication rules
+
+Final public evidence must not expose:
 
 - passwords;
 - authentication tokens;
@@ -106,19 +99,9 @@ Final evidence must not expose:
 - local environment values;
 - Firebase Admin credentials;
 - revalidation secrets;
-- private browser/session information;
+- private browser or session information;
 - unnecessary personal information.
 
-Avoid final screenshots containing:
+Avoid publication screenshots containing DevTools, browser extension overlays, console warnings, unrelated desktop content, or debugging UI.
 
-- DevTools;
-- browser extension overlays;
-- console warnings;
-- unrelated desktop content;
-- debugging UI.
-
-## Selection rule
-
-A screenshot should be versioned only when it adds distinct evidence to the case.
-
-Multiple images showing the same capability should be avoided unless they demonstrate materially different states.
+A screenshot belongs to the publication set only when it demonstrates distinct verified behavior and passes the applicable privacy review.
