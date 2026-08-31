@@ -22,7 +22,6 @@ import {
 import CartSummary from '@/features/cart/components/CartSummary';
 import EmptyCartState from '@/features/cart/components/EmptyCartState';
 import CheckoutSteps from '../components/CheckoutSteps';
-// estes dois componentes serão implementados depois
 import AddressForm from '../components/AddressForm';
 import PaymentMethods from '../components/PaymentMethods';
 
