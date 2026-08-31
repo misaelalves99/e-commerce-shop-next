@@ -7,7 +7,8 @@ The repository provides dedicated scripts for:
 - tests;
 - TypeScript type checking;
 - ESLint;
-- production build.
+- production build;
+- Playwright browser acceptance through `npm run test:e2e`.
 
 GitHub Actions also provides the repository quality workflow.
 
@@ -22,6 +23,14 @@ The current automated suite covers areas including:
 - order creation behavior;
 - catalog mapping;
 - route contracts.
+
+## Browser acceptance
+
+The implemented Stage 09 browser acceptance layer uses Playwright with Chromium against a production-equivalent Next.js runtime.
+
+The deterministic guest suite currently contains three Chromium tests covering publication-critical storefront, product, cart, persistence, and protected-checkout redirect behavior.
+
+Authenticated browser acceptance remains deferred until a deterministic privacy-safe authentication strategy is proven.
 
 ## Security-oriented implementation
 

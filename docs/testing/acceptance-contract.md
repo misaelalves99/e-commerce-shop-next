@@ -2,7 +2,7 @@
 
 ## Status
 
-Scope frozen for implementation planning.
+Stage 09 browser acceptance is implemented for the deterministic guest and authentication-boundary scope documented below.
 
 ## Primary goal
 
@@ -10,12 +10,11 @@ Introduce reproducible browser-level acceptance coverage for the
 already implemented publication-critical commerce journey without
 weakening authentication, security, persistence, or privacy boundaries.
 
-## Current verified gap
+## Current verified acceptance baseline
 
-The repository has unit/domain/integration-style automated tests and
-quality gates for lint, typecheck, tests, dependency audit, and
-production build, but it does not yet have browser-level acceptance
-automation.
+The repository has unit/domain/integration-style automated tests and quality gates for lint, typecheck, tests, dependency audit, and production build.
+
+Stage 09 additionally provides Playwright browser acceptance on Chromium for the deterministic guest commerce path and protected-checkout authentication boundary. Authenticated checkout, order-success, and persisted-order browser automation remain explicitly deferred as documented in the implemented status section.
 
 ## Acceptance layers
 

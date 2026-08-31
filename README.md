@@ -61,9 +61,12 @@ Available repository checks include:
 - `npm run typecheck`
 - `npm run lint`
 - `npm audit`
+- `npm run test:e2e`
 - `npm run build`
 
 The repository also includes a GitHub Actions quality workflow.
+
+Browser acceptance is implemented with Playwright on Chromium through `npm run test:e2e` against the production-equivalent application runtime.
 
 ## Environment configuration
 
