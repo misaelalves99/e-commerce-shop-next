@@ -128,3 +128,109 @@ test("home exposes a semantic path to the catalog", async ({ page }) => {
     page.locator("article[data-product-id]").first(),
   ).toBeVisible();
 });
+test("guest can update and persist cart quantity", async ({ page }) => {
+  await page.goto("/products");
+
+  const productCard = page
+    .locator("article[data-product-id]")
+    .filter({
+      has: page.getByRole("button", {
+        name: "Adicionar ao carrinho",
+      }),
+    })
+    .first();
+
+  await expect(productCard).toBeVisible();
+
+  const productHeading = productCard.getByRole("heading", {
+    level: 3,
+  });
+
+  const productTitle = (await productHeading.innerText()).trim();
+
+  expect(productTitle.length).toBeGreaterThan(0);
+
+  await productCard
+    .getByRole("link", {
+      name: productTitle,
+      exact: true,
+    })
+    .first()
+    .click();
+
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: productTitle,
+      exact: true,
+    }),
+  ).toBeVisible();
+
+  const purchaseRegion = page.getByRole("region", {
+    name: "Comprar produto",
+  });
+
+  const productQuantityIncrease = purchaseRegion.getByRole("button", {
+    name: "Aumentar quantidade",
+  });
+
+  await expect(productQuantityIncrease).toBeEnabled();
+
+  await purchaseRegion
+    .getByRole("button", {
+      name: "Adicionar ao carrinho",
+    })
+    .click();
+
+  await page.goto("/cart");
+
+  let cartItem = page.getByRole("article", {
+    name: `Produto ${productTitle}`,
+  });
+
+  await expect(cartItem).toBeVisible();
+
+  let quantityValue = cartItem.locator(
+    'button[aria-label="Diminuir quantidade"] + span',
+  );
+
+  const decreaseButton = cartItem.getByRole("button", {
+    name: "Diminuir quantidade",
+  });
+
+  const increaseButton = cartItem.getByRole("button", {
+    name: "Aumentar quantidade",
+  });
+
+  await expect(quantityValue).toHaveText("1");
+  await expect(decreaseButton).toBeDisabled();
+  await expect(increaseButton).toBeEnabled();
+
+  await increaseButton.click();
+
+  await expect(quantityValue).toHaveText("2");
+  await expect(decreaseButton).toBeEnabled();
+
+  await page.reload();
+
+  cartItem = page.getByRole("article", {
+    name: `Produto ${productTitle}`,
+  });
+
+  await expect(cartItem).toBeVisible();
+
+  quantityValue = cartItem.locator(
+    'button[aria-label="Diminuir quantidade"] + span',
+  );
+
+  await expect(quantityValue).toHaveText("2");
+
+  const persistedDecreaseButton = cartItem.getByRole("button", {
+    name: "Diminuir quantidade",
+  });
+
+  await persistedDecreaseButton.click();
+
+  await expect(quantityValue).toHaveText("1");
+  await expect(persistedDecreaseButton).toBeDisabled();
+});
