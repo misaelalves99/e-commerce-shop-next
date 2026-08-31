@@ -152,3 +152,36 @@ Stage 09 is complete only when:
 - production build remains green;
 - no sensitive test material is tracked;
 - acceptance architecture and limitations are documented.
+
+## Implemented Stage 09 browser acceptance status
+
+The initial browser acceptance project is Chromium through Playwright.
+
+The verified runtime is production-equivalent:
+
+1. build the Next.js application;
+2. start the production server;
+3. execute Playwright browser acceptance against the running application.
+
+The deterministic guest acceptance layer currently contains three Chromium tests.
+
+Verified browser-level coverage includes:
+
+- Home discovery and semantic navigation into the catalog;
+- catalog and product-detail navigation;
+- add-to-cart behavior;
+- guest cart presence;
+- cart persistence across reload;
+- cart quantity update and persistence;
+- protected checkout redirect for an unauthenticated visitor;
+- preservation of the `/checkout` redirect intent.
+
+The Quality workflow now installs Chromium with Playwright after the production build and executes `npm run test:e2e`.
+
+When the workflow fails, Playwright HTML diagnostics are configured for upload through the `playwright-report` artifact when that report is available.
+
+Authenticated browser acceptance remains explicitly deferred until a deterministic privacy-safe authentication strategy is proven.
+
+No personal account credentials, authentication tokens, session cookies, private Firebase credentials, or local environment files are part of the committed browser acceptance suite.
+
+The current automated acceptance boundary therefore proves the deterministic guest commerce path and authentication boundary. It does not claim automated authenticated checkout, order-success, or persisted-order browser coverage.
