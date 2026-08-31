@@ -101,3 +101,30 @@ test("guest commerce preserves cart and checkout intent", async ({ page }) => {
     );
   });
 });
+test("home exposes a semantic path to the catalog", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page).toHaveURL("/");
+
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "Tudo o que você precisa em um só lugar",
+    }),
+  ).toBeVisible();
+
+  const catalogCta = page.getByRole("link", {
+    name: "Ver ofertas de hoje",
+    exact: true,
+  });
+
+  await expect(catalogCta).toBeVisible();
+
+  await catalogCta.click();
+
+  await expect(page).toHaveURL(/\/products(?:\?.*)?$/);
+
+  await expect(
+    page.locator("article[data-product-id]").first(),
+  ).toBeVisible();
+});
